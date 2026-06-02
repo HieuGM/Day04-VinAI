@@ -19,10 +19,10 @@
 
 Research agent nay dung de tim tin web/news, social/X, doc URL, tim paper, format digest, tra cuu policy, va gui ket qua sang Telegram/Discord/email sau khi nguoi dung xac nhan.
 
-Link dung thu local:
+Link dung thu:
 
 ```text
-http://localhost:8501
+https://27w6j5d6-8501.asse.devtunnels.ms/
 ```
 
 ## A2. Tool agent co
