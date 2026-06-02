@@ -1,7 +1,7 @@
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Ask the user one concise follow-up question when a required input is missing, ambiguous, or a send/post/publish action needs explicit confirmation. Do not use this for meta or out-of-scope questions."
+    description: "Ask the user one concise follow-up question when a required input is missing, ambiguous, or a send/post/publish action needs explicit confirmation. Use response_type=yes_no for action confirmation before Telegram, Discord, email, or publishing; do not use text for that confirmation boundary. Do not use this for meta or out-of-scope questions."
     parameters:
       type: object
       properties:
@@ -22,7 +22,7 @@ tools:
       required: [question, response_type]
 
   - name: timeline
-    description: "Get recent posts/tweets FROM one specific final account or named person. Use for requests like 'tweets by Sam Altman' or 'latest posts from Elon Musk'. Requires a real screenname; ask clarify if the account/person is missing. Known mappings: Sam Altman=sama, Elon Musk=elonmusk, Andrej Karpathy=karpathy. If a multi-turn correction replaces the account, call this tool exactly once for the last corrected account only; never also call it for the earlier account."
+    description: "Get recent posts/tweets FROM one specific final account or named person. Use for requests like 'tweets by Sam Altman' or 'latest posts from Elon Musk'. Requires a real screenname; ask clarify only if the account/person is missing, not merely because count is missing. Never default to Sam Altman/sama, Elon Musk/elonmusk, or any famous account when the user did not name an account. Known mappings: Sam Altman=sama, Elon Musk=elonmusk, Andrej Karpathy=karpathy. If a multi-turn correction replaces the account, call this tool exactly once for the last corrected account only; never also call it for the earlier account."
     parameters:
       type: object
       properties:
@@ -219,3 +219,130 @@ tools:
           default: 5
           description: "Number of variants to generate."
       required: [topic]
+
+  - name: github_search
+    description: "Search GitHub repositories, issues, or users through the GitHub Search API. Use for GitHub repo/library discovery, issue/PR research, project comparisons, or finding GitHub accounts. Optional GITHUB_TOKEN improves rate limits."
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "GitHub search query."
+        search_type:
+          type: string
+          enum: [repositories, issues, users]
+          default: "repositories"
+          description: "Use repositories for repos/libraries, issues for issues or PR-like research, users for GitHub accounts."
+        max_results:
+          type: integer
+          default: 5
+          description: "Number of results to return."
+        sort:
+          type: string
+          enum: [best_match, stars, forks, updated, comments, created]
+          default: "best_match"
+          description: "Optional GitHub sort. Use best_match unless the user asks for stars/forks/recent/etc."
+      required: [query]
+
+  - name: hn_search
+    description: "Search Hacker News stories or comments through the public Algolia HN API. Use when the user asks for Hacker News/HN discussions, stories, reactions, or comments about a topic."
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "Topic to search on Hacker News."
+        search_type:
+          type: string
+          enum: [story, comment, all]
+          default: "story"
+          description: "Use story for submissions, comment for comments, all for both."
+        max_results:
+          type: integer
+          default: 5
+          description: "Number of HN results."
+      required: [query, search_type]
+
+  - name: wikipedia_summary
+    description: "Fetch a Wikipedia summary for an entity, concept, company, person, technology, or background topic. Use for encyclopedia-style context, not for latest news."
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "Wikipedia search query or page title."
+        language:
+          type: string
+          enum: [en, vi]
+          default: "en"
+          description: "Wikipedia language."
+        max_chars:
+          type: integer
+          default: 1200
+          description: "Maximum summary characters."
+      required: [query]
+
+  - name: rss_read
+    description: "Read an explicit RSS or Atom feed URL and return recent entries. Use for feed URLs ending in rss/xml/atom or when the user explicitly asks to read an RSS/feed. If no feed URL is provided, use clarify."
+    parameters:
+      type: object
+      properties:
+        feed_url:
+          type: string
+          default: ""
+          description: "The exact RSS/Atom feed URL."
+        max_items:
+          type: integer
+          default: 5
+          description: "Number of feed entries to return."
+      required: [feed_url]
+
+  - name: discord_send
+    description: "Send text to a Discord channel via DISCORD_WEBHOOK_URL. This is a side-effect action. Call only after explicit user confirmation; otherwise call clarify with response_type=yes_no."
+    parameters:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ""
+          description: "Message text to send to Discord."
+        username:
+          type: string
+          default: ""
+          description: "Optional webhook display username."
+        confirmed:
+          type: boolean
+          default: false
+          description: "Must be true only after explicit user confirmation."
+      required: [text, confirmed]
+
+  - name: email_send
+    description: "Send an already prepared email through Resend using RESEND_API and RESEND_FROM. This is a side-effect action. Use for email delivery, including AI news digests after the news text has been prepared. Call only after explicit user confirmation; otherwise call clarify with response_type=yes_no. If recipient, subject, or email body is missing, call clarify with response_type=text."
+    parameters:
+      type: object
+      properties:
+        to:
+          type: array
+          default: []
+          items: {type: string}
+          description: "Recipient email addresses."
+        subject:
+          type: string
+          default: ""
+          description: "Email subject."
+        text:
+          type: string
+          default: ""
+          description: "Plain text email body. Include the prepared AI news digest or message to send."
+        html:
+          type: string
+          default: ""
+          description: "Optional HTML email body."
+        confirmed:
+          type: boolean
+          default: false
+          description: "Must be true only after explicit user confirmation."
+      required: [to, subject, text, confirmed]

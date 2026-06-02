@@ -40,11 +40,21 @@ class OpenAIProvider:
             raise RuntimeError(f"Missing API key env var: {self.api_key_env}")
 
         client = OpenAI(api_key=api_key, base_url=self.base_url)
+        provider_prefix = self.api_key_env.removesuffix("_API_KEY")
+        max_tokens_raw = (
+            os.getenv(f"{provider_prefix}_MAX_TOKENS")
+            or os.getenv("PROVIDER_MAX_TOKENS")
+            or "2048"
+        )
         kwargs: dict[str, Any] = {
             "model": model or self.default_model,
             "messages": messages,
             "temperature": temperature,
         }
+        try:
+            kwargs["max_tokens"] = int(max_tokens_raw)
+        except ValueError:
+            kwargs["max_tokens"] = 2048
         if tools:
             kwargs["tools"] = tools
         if tool_choice is not None:

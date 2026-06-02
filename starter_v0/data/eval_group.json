@@ -113,6 +113,73 @@
       "failure_type": "wrong_arg_value",
       "expect": {"tool_calls": [{"name": "query_expand", "args": {"topic": "chuỗi cung ứng bán dẫn", "intent": "news", "language": "vi", "max_variants": 5}}]},
       "metadata": {"what_it_tests": "Multi-turn voi tool moi: carry topic sang dang tieng Viet, language=vi, intent=news, max_variants=5."}
+    },
+    {
+      "id": "G06_github_search_repo",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tim tren GitHub cac repository ve streamlit dashboard",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "github_search", "args": {"search_type": "repositories"}}]},
+      "metadata": {"what_it_tests": "GitHub repo discovery -> github_search repositories."}
+    },
+    {
+      "id": "G07_hn_search_story",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tim Hacker News stories ve AI agents",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hn_search", "args": {"search_type": "story"}}]},
+      "metadata": {"what_it_tests": "Hacker News request -> hn_search."}
+    },
+    {
+      "id": "G08_wikipedia_background",
+      "phase": "B",
+      "suite": "group",
+      "query": "Lay tom tat Wikipedia ve Transformer neural network",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "wikipedia_summary", "args": {}}]},
+      "metadata": {"what_it_tests": "Wikipedia background request -> wikipedia_summary, khong lookup."}
+    },
+    {
+      "id": "G09_rss_feed_read",
+      "phase": "B",
+      "suite": "group",
+      "query": "Doc 3 muc moi tu RSS feed https://hnrss.org/frontpage",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "rss_read", "args": {"feed_url": "https://hnrss.org/frontpage", "max_items": 3}}]},
+      "metadata": {"what_it_tests": "Explicit RSS feed URL -> rss_read."}
+    },
+    {
+      "id": "GM07_discord_after_confirm",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Gui vao Discord: Research agent da pass eval."},
+        {"role": "user", "content": "Khoan gui nhe"},
+        {"role": "user", "content": "Toi xac nhan gui Discord"}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "discord_send", "args": {"confirmed": true}}]},
+      "metadata": {"what_it_tests": "Discord action chi duoc goi sau khi xac nhan."}
+    },
+    {
+      "id": "G10_format_bullets",
+      "phase": "B",
+      "suite": "group",
+      "query": "Format cac item co san nay thanh markdown bullets: 1) OpenAI ra mat model moi - https://openai.com 2) GitHub co repo agent moi - https://github.com",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "format", "args": {"template": "bullets"}}]},
+      "metadata": {"what_it_tests": "Yeu cau format item co san -> format tool, khong fetch/lookup."}
+    },
+    {
+      "id": "G11_email_requires_confirm",
+      "phase": "B",
+      "suite": "group",
+      "query": "Gui email noi dung nay toi demo@example.com voi subject AI News: Ban tin AI da san sang.",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"what_it_tests": "Email la action qua Resend nen phai hoi xac nhan truoc, khong duoc goi email_send ngay."}
     }
   ]
 }

@@ -1,0 +1,1250 @@
+{
+  "run_id": "v6_B_group_openrouter_20260602T154555831960",
+  "version": "v6",
+  "artifact_version": "v6+pbe5b3ff468ae+tcedbe9df2c77",
+  "prompt_hash": "be5b3ff468aedfcb21e654a90b302e6e7489e7bff5725273200101a7124b3a58",
+  "tools_hash": "cedbe9df2c779380f3e27d9368cd2da7cf2d03aeff6185fa60f3c1400c695304",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do nhom tu viet them de cover routing, args, missing info, action boundary, multi-turn carryover/correction, va tool query_expand moi.",
+  "generated_at": "2026-06-02T15:45:55",
+  "summary": {
+    "total_cases": 16,
+    "measured_cases": 16,
+    "provider_error_cases": 0,
+    "passed_cases": 16,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Topic tren Twitter/X -> social_search, top/pho bien -> Top, giu dung limit=7."
+      },
+      "input": "Cho minh 7 tweet pho bien nhat ve OpenAI",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "OpenAI",
+              "search_type": "Top",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "OpenAI",
+              "search_type": "Top",
+              "limit": 7
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "OpenAI",
+            "search_type": "Top",
+            "limit": 7
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Top"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_lookup_month_news",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Tin/current web -> lookup topic=news; thang nay -> timeframe=month."
+      },
+      "input": "Tin robotics trong thang nay co gi dang chu y?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Robotics Summit keynote to present open foundation for AI-powered robots - The Robot Report",
+                "url": "https://www.therobotreport.com/robotics-summit-keynote-present-open-robotics-ai-foundation/",
+                "source": "therobotreport.com",
+                "summary": "# Robotics Summit keynote to present open foundation for AI-powered robots. Open Robotics will discuss the open-source robotics ecosystem and AI at the 2026 Robotics Summit & Expo. Developments in artificial intelligence and robotics are converging and accelerating, making open source more critical than ever, according to Open Robotics. The organization, which maintains the Robot Operating System and the Gazebo simulator, will explore how the technology ecosystem is evolving to meet the demands of the AI era at the Robotics Summit & Expo in Boston next week. In the keynote on “An Open Foundation for the Age of AI-Powered Robots,” the company plans to discuss how open-source technology is driving innovation broadly in automation and physical AI while fostering a robust, collaborative community. Brian Gerkey, co-founder and former CEO of Open Robotics, will highlight the strategic vision of the Open Source Robotics Alliance (OSRA). The organization invites roboticists to join it to build the open foundation for the age of AI-powered robotics.",
+                "score": 0.45333505
+              },
+              {
+                "title": "The power of the open-source community in robotics: Collaboration and shared innovation - Robotics & Automation News",
+                "url": "https://roboticsandautomationnews.com/2026/05/27/the-power-of-the-open-source-community-in-robotics-collaboration-and-shared-innovation/101927/",
+                "source": "roboticsandautomationnews.com",
+                "summary": "# The power of the open-source community in robotics: Collaboration and shared innovation. **For decades, robotics was viewed as a niche engineering discipline inhabited largely by researchers, academics, and highly specialized industrial automation companies.**. Today, robotics sits at the center of one of the largest technology investment waves in modern industrial history. Governments are pouring billions into automation, manufacturers are racing to digitize operations, AI companies are building “physical AI” systems for real-world machines, and venture capital firms are funding everything from warehouse robots and humanoids to autonomous tractors and delivery systems. Increasingly, the robotics industry is being built not by isolated companies working behind closed doors, but by global communities sharing software, simulation environments, AI frameworks, and development tools. ### ROS and the creation of a common robotics language. Before ROS, robotics software development was fragmented and highly proprietary. Today, ROS and ROS 2 underpin large portions of the global robotics ecosystem, from university research projects to commercial warehouse automation systems and autonomous mobile robots deployed in factories.",
+                "score": 0.4066976
+              },
+              {
+                "title": "Inside Verobotics’ edge AI robotics deployment at NVIDIA’s Israel campus - The Robot Report",
+                "url": "https://www.therobotreport.com/inside-verobotics-edge-ai-robotics-deployment-at-nvidias-israel-campus/",
+                "source": "therobotreport.com",
+                "summary": "# Inside Verobotics’ edge AI robotics deployment at NVIDIA’s Israel campus. Verobotics engineered a lightweight, surface-agnostic façade robot to bring real mobility, not just suspended access, to exterior cleaning and inspection. At NVIDIA’s Israel campus, façade cleaning became something far more significant than a maintenance operation. What began as a practical solution to a universal pain point — dirty windows and difficult-to-maintain high-rise façades — evolved into a real-world demonstration of how AI-powered robotics can fundamentally change the way buildings are monitored, maintained, and protected over time. Because while every building owner immediately understands the frustration and cost of façade cleaning, the deeper value of Verobotics lies elsewhere: turning routine maintenance into continuous architectural intelligence. m) of building envelope and 3,000 windows and façade sections, Verobotics combined robotic façade cleaning, AI vision, and edge computing. The NVIDIA campus deployment reflected the realities of operating in live commercial environments rather than controlled demo conditions.",
+                "score": 0.4066976
+              },
+              {
+                "title": "PAL Robotics unveils new robotic arm platform for advanced AI-driven manipulation - Robotics & Automation News",
+                "url": "https://roboticsandautomationnews.com/2026/05/14/pal-robotics-unveils-new-robotic-arm-platform-for-advanced-ai-driven-manipulation/101537/",
+                "source": "roboticsandautomationnews.com",
+                "summary": "# PAL Robotics unveils new robotic arm platform for advanced AI-driven manipulation. **PAL Robotics has announced a new robotic arm platform aimed at researchers, developers, and robotics engineers working on advanced manipulation applications.**. The Barcelona-based robotics company, known for platforms including TIAGo Pro and Kangaroo, said the new system has been designed to make robotic manipulation more accessible, flexible, and easier to deploy across both research and real-world operational environments. The cookie is used to store the user consent for the cookies in the category \"Analytics\". The cookies is used to store the user consent for the cookies in the category \"Necessary\". The cookie is used to store the user consent for the cookies in the category \"Other. The cookie is used to store the user consent for the cookies in the category \"Performance\". | viewed\\_cookie\\_policy | 11 months | The cookie is set by the GDPR Cookie Consent plugin and is used to store whether or not user has consented to the use of cookies.",
+                "score": 0.3977518
+              },
+              {
+                "title": "Robotics: How to use it on UK building sites - Construction News",
+                "url": "https://www.constructionnews.co.uk/sections/long-reads/opinion/robotics-how-to-use-it-on-uk-building-sites-27-05-2026/",
+                "source": "constructionnews.co.uk",
+                "summary": "# Robotics: How to use it on UK building sites. The question isn’t about whether robotics belongs in construction – it’s about how we choose to deploy it on site, and what kind of industry we want to build over the next decade. > “Those who implement robotics early develop human-bot collaboration skills that last”. Successful deployment starts with picking the right tools, which is where I have seen the problems start. Many of us have seen how easily conversations about robotics begin with a specific new piece of technology. An exciting demo at a trade show can spark the discussion of ‘where can I fit this in?’ The most important first step in facilitating is identifying actual pain points where robotics might help, not getting swept up in hype, which is all too easy. I believe robotics on UK construction sites should revolve around building an internal structure for innovation. Where I’ve seen the most significant success is in companies that adopted robotics early.",
+                "score": 0.3804832
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_fetch_explicit_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "URL cu the -> fetch, khong lookup."
+      },
+      "input": "Doc va tom tat link nay: https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao",
+            "items": [
+              {
+                "title": "Google ADK: \"Đồ Chơi\" Mới Cho Dân Nghiện AI Agent - Viblo",
+                "url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao",
+                "source": "viblo.asia",
+                "summary": "[![](https://images-stg.viblo.asia/full/febac246-5d8f-4d92-8b57-a52ae34ee068.png)](https://viblo.asia/announcements/chinh-thuc-bat-dau-viblo-mayfest-2026-uncode-the-mindset-lZL9XqYWJQK)\n\n+48\n\n\nCỡ chữ\n\n18px\n\nĐộ cao hàng\n\n1.75\n\nMặc định\n\nToàn màn hình\n\n\nMàu nền\n\n\nĐặt lại\n\n\n[MayFest2025](https://viblo.asia/tags/mayfest2025) [ContentCreator](https://viblo.asia/content-creator)\n\n- Báo cáo\n\n- Thêm vào series của tôi\n\n\n_**Nếu anh em thấy hay thì ủng hộ mình 1 follow + 1 upvote + 1 bookmark + 1 comment cho bài viết này tại Mayfest 2025 nhé, cảm ơn anh em!**_\n\nXin chào anh em, những pháp sư AI và các tín đồ công nghệ quay trở lại với Trà đá công nghệ!\n\nĐã bao giờ anh em thử \"nặn\" ra một con AI agent, một \"đệ tử\" nhân tạo có thể tự làm việc, suy nghĩ, tương tác như người thật chưa? Nghe thì \"oách\" đấy, nhưng bắt tay vào mới thấy nó \"khoai\" cỡ nào: quản lý logic, tích hợp tool, điều phối cả \"tiểu đội\" agent... Ôi thôi, nghĩ thôi đã thấy \"tóc dựng ngược\"! Cảm giác như đang cố giải toán không công thức, hay lắp robot phức tạp mà hướng dẫn lại bằng... chữ tượng hình.\n\nNhưng khoan, đừng vội \"khóc thét\" và từ bỏ ước mơ xây \"đế chế AI\" của riêng mình! Bởi vì, \"siêu nhân\" Google đã xuất hiện với một \"bảo bối\" mang tên **Agent Development Kit (ADK)**. Nghe đồn, ADK sẽ biến cơn ác mộng xây AI agent thành cuộc dạo chơi \"dễ như ăn kẹo\". Liệu có thật không hay chỉ là \"chém gió thành bão\"? Cùng tôi \"soi\" kỹ xem sao!\n\n![](https://images.viblo.asia/dd568548-ec45-4738-b5fd-41c883b61c5e.png)\n\n## 1\\. Google ADK: \"Quái Vật\" Nào Mà \"Thần Thánh\" Vậy?\n\n**Google ADK** (Agent Development Kit) là một framework **mã nguồn mở** được Google \"thai nghén\" để đơn giản hóa việc phát triển và triển khai AI agent. Tưởng tượng ADK như bộ đồ nghề xịn sò, cung cấp đủ \"đồ chơi\" để anh em xây từ agent \"lặt vặt\" đến hệ thống đa agent phức tạp, xử lý cả \"rổ\" việc.\n\nĐiều đặc biệt là ADK được thiết kế để việc phát triển agent **giống như làm phần mềm truyền thống** hơn, giúp các \"coder\" dễ tiếp cận. Dù tối ưu cho \"gà nhà\" Gemini và hệ sinh thái Google, ADK vẫn rất \"thoáng\", không \"kén\" model AI, nền tảng triển khai, và còn \"chơi đẹp\" với framework khác nữa.\n\n**Vậy ADK có gì \"hot\"?**\n\n- **Kiến trúc Đa Agent (Multi-Agent Systems):** Xây dựng ứng dụng từ nhiều agent chuyên biệt, mỗi đứa một việc, rồi kết hợp thành \"biệt đội siêu đẳng\". Dễ mở rộng, dễ quản lý.\n- **Hệ Sinh Thái Tool Phong Phú (Rich Tool Ecosystem):** Trang bị cho agent đủ loại \"vũ khí\": tool có sẵn (tìm kiếm, chạy code), tool tùy chỉnh (anh em tự viết), tích hợp thư viện bên thứ ba (LangChain, CrewAI), hay thậm chí dùng agent khác làm tool!\n- **Điều Phối Linh Hoạt (Flexible Orchestration):** Định nghĩa workflow rõ ràng bằng \"workflow agent\" (tuần tự, song song, lặp) cho pipeline dễ đoán, hoặc để LLM tự \"xoay sở\" với định tuyến động cho tác vụ cần thích ứng cao.\n- **Sẵn Sàng Triển Khai (Deployment Ready):** \"Đóng gói\" agent và \"thả\" ở bất cứ đâu: chạy local, scale với Vertex AI Agent Engine, hoặc tích hợp vào hạ tầng riêng dùng Cloud Run/Docker.\n- **Đánh Giá Tích Hợp (Built-in Evaluation):** Có công cụ để \"soi\" hiệu suất agent, từ chất lượng phản hồi cuối cùng đến từng bước thực thi.\n- **Code-First Development:** Logic agent, tool, điều phối được định nghĩa trực tiếp bằng Python, mang lại sự linh hoạt, khả năng kiểm thử và quản lý phiên bản tối đa.\n\nNói tóm lại, ADK như \"công thức bí truyền\" giúp anh em \"nấu\" món AI agent \"ngon lành\" mà không cần là \"siêu đầu bếp\".\n\n## 2\\. \"Mổ Xẻ\" ADK: Xây Agent \"Dễ Như Kẹo\" Với Vài Dòng Code Thần Thánh\n\nNói nhiều mất hay, giờ \"xắn tay áo lên\" xem ADK dễ dùng cỡ nào qua vài ví dụ \"cười ra nước mắt\" nhé!\n\nĐầu tiên, cài ADK. Đơn giản như đan rổ:\n\n```python\npip install google-adk\n```\n\nĐã sao chép ✔️\n\nXong! Nhớ tạo môi trường ảo (virtual environment) cho \"sạch sẽ\" nhé. Giờ đến phần \"thịt thà\"!\n\n### 2.1. Ví dụ 1: Agent \"Chào Hỏi Kiểu Gen Z\"\n\n- **Mục tiêu:** Tạo agent siêu đơn giản, chào hỏi theo phong cách \"teen code\" cho nó \"chất\".\n\n- **Code:**\n\n\n\n```python\n# agent_greeting.py\nfrom google."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_missing_url_clarify",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Thieu URL va khong co context -> clarify, khong doan link."
+      },
+      "input": "Tom tat bai viet minh vua nhac toi giup minh",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Vui lòng cung cấp URL của bài viết mà bạn muốn tóm tắt.",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Vui lòng cung cấp URL của bài viết mà bạn muốn tóm tắt.",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Vui lòng cung cấp URL của bài viết mà bạn muốn tóm tắt.",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_query_expand_new_tool",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yeu cau tao query/keyword ro rang -> dung tool query_expand moi."
+      },
+      "input": "Tao 4 query tim kiem tieng Viet ve AI agents dang tin tuc",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "AI agents",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 4
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "AI agents",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 4
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_expand",
+          "args": {
+            "topic": "AI agents",
+            "intent": "news",
+            "language": "vi",
+            "max_variants": 4
+          },
+          "result": {
+            "tool": "query_expand",
+            "topic": "AI agents",
+            "intent": "news",
+            "language": "vi",
+            "queries": [
+              "AI agents",
+              "AI agents tin moi nhat",
+              "AI agents hom nay",
+              "AI agents tuan nay"
+            ],
+            "count": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM01_multiturn_topic_carry_time",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn: latest turn yeu cau web news, carry topic robotics va timeframe=day."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin AI hom nay co gi?"
+        },
+        {
+          "role": "user",
+          "content": "Chuyen sang robotics nhe"
+        },
+        {
+          "role": "user",
+          "content": "Van la tin hom nay, tim tren web"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Top 10 robotics stories of May 2026 - The Robot Report",
+                "url": "https://www.therobotreport.com/top-10-robotics-stories-of-may-2026/",
+                "source": "therobotreport.com",
+                "summary": "# Top 10 robotics stories of May 2026. May 2026 was a busy month full of robotics news, topped off by last week’s Robotics Summit & Expo in Boston. The event brought together thousands of robotics experts to discuss the latest technology and industry advances. Here are the 10 most popular articles on *The Robot Report* in the past month. Subscribe to *The Robot Report*Newsletter and listen to *The Robot Report* Podcast to stay up to date on the latest robotics developments. Humanoid partners with Bosch, Schaeffler to scale robot production in May 2026. London-based Humanoid said it is working with Bosch to scale production after the successful completion of a joint proof of concept in March. It serves as the primary hub for NEO, the company’s humanoid robot designed to operate quietly—at a decibel level lower than a modern refrigerator—while navigating domestic spaces. If you’ve built a robotics company in the past 10 years, chances are you’ve at least flirted with the idea of robotics as a service, or RaaS.",
+                "score": 0.56258565
+              },
+              {
+                "title": "ANSCER Robotics closes Series A round for industrial material handling - The Robot Report",
+                "url": "https://www.therobotreport.com/anscer-robotics-closes-series-a-round-industrial-material-handling/",
+                "source": "therobotreport.com",
+                "summary": "# ANSCER Robotics closes Series A round for industrial material handling. ANSCER Robotics provides autonomous mobile robots and software for industrial material handling. Aiming to capture a larger share of the American logistics market, deep-tech startup ANSCER Robotics has raised $5.4 million (₹45 crore) in Series A funding to scale its fleet of hybrid warehouse robots globally. The company said it is designing and building automation for the realities of modern manufacturing and logistics by helping enterprises improve productivity, safety, and operational efficiency at scale. According to ANSCER Robotics, this latest investment will accelerate its mission to build India’s AI-native industrial automation platform for factories and warehouses worldwide. “Naturally, we are expanding our markets and our product line, and the company will have a booth at Automate 2026,” Mark Messina, CEO of ANSCER Robotics Americas, told *The Robot Report*. “Our robots are designed and built for deployment in complex, rough environments — manufacturing floors and dock areas.”. Mike Oitzman is Senior Editor of WTWH's Robotics Group and founder of the Mobile Robot Guide.",
+                "score": 0.4450718
+              },
+              {
+                "title": "Add Flexibility and Speed to Your Operation with Next-Generation Robotics by Okuma - Modern Machine Shop",
+                "url": "https://www.mmsonline.com/articles/add-flexibility-and-speed-to-your-operation-with-next-generation-robotics-by-okuma",
+                "source": "mmsonline.com",
+                "summary": "Okuma’s second generation of robotics loaders incorporates updates that enable flexibility and faster processing time for any manufacturing operation. As Okuma launches its second-generation of single-machine robotic loaders, the ORL Mark-II Series, and prepares for the IMTS 2026 launch of its two-machine automation systems (the ORL-PLUS Series), Simon Schneider, director of Okuma Factory Automation, speaks about the technologies that make its automation systems more accessible. Okuma’s ORL-D II for turning center automation features a revamped robotic end effector with programmable force control and fingers compatible with different part sizes without adjustment. Possibly the most significant innovation in the ORL-D II drawer-type automation system for turning centers is an update to the robot’s end effector. Users can also benefit from a standard blow-off module integrated into the end effector to remove chips from the part before taking it from the machine, as well as an integrated laser sensor that measures part height and prompts the robot to adjust its gripping strategy to fit the part.",
+                "score": 0.37786257
+              },
+              {
+                "title": "Silicon Valley's New Slogan: Let's Get Physical - Business Insider",
+                "url": "https://www.businessinsider.com/silicon-valleys-new-slogan-lets-get-physical-2026-6",
+                "source": "businessinsider.com",
+                "summary": "You're currently following this topic! The latest news and analysis on robotics, from humanoid AI to real-world automation. ### Figure AI had one of its robots race an intern to sort packages. This weekend offered a glimpse of how quickly the biggest AI players are moving in on humanoid robotics. Robotics has become tech's latest arms race, with Nvidia, OpenAI, Meta, Tesla, and a flock of startups racing to give AI a body. \"Physical AI\" is the buzzword of the moment in the Valley, a term popularized by Nvidia CEO Jensen Huang to describe AI systems that can act in the physical world. One of the buzziest Silicon Valley robotics upstarts, Figure AI, has been trying to prove its technology can move from demos to real work. The team is teaching a robotic arm how to perform household tasks as part of an effort to build a humanoid robot, Business Insider reported earlier this year.",
+                "score": 0.37724295
+              },
+              {
+                "title": "Learn about advances in robotic case and each picking - The Robot Report",
+                "url": "https://www.therobotreport.com/learn-about-advances-robotic-case-each-picking-webinar/",
+                "source": "therobotreport.com",
+                "summary": "# Learn about advances in robotic case and each picking. Order fulfillment is accelerating with robotic case and each picking. From robotic grippers to machine vision and artificial intelligence, progress is accelerating in automated manipulation. In this week’s webinar on robotic case and each picking, industry leaders will discuss technologies and widening use cases. In this free webinar, attendees can learn how robots plus people can improve productivity, from collaborative picking to human-supervised exception handling. * Advances in robotic manipulation for case and each picking. With nearly 15 years of product management experience and a proven track record of bringing breakthrough technologies to market, Bowlby previously served as head of product at Neurala and as a product manager at Rockwell Automation. **Gina Chung** is chief strategy officer at Locus Robotics, a global leader in AI-powered warehouse automation with more than 17,000 robots deployed across over 360 sites around the world.",
+                "score": 0.29928485
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM02_multiturn_correct_account",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn correction: Sam Altman override Elon Musk, map handle sama, limit=2."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tweet moi nhat cua Elon Musk"
+        },
+        {
+          "role": "user",
+          "content": "A nham, cua Sam Altman"
+        },
+        {
+          "role": "user",
+          "content": "Lay 2 tweet moi nhat thoi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "sama",
+              "limit": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "sama",
+              "limit": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 2
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "sama",
+            "source": "nitter_rss",
+            "items": [
+              {
+                "title": "The OpenAI Foundation is doing a lot of wonderful things. Helping society become resilient to AI is going to be incredib",
+                "summary": "The OpenAI Foundation is doing a lot of wonderful things. Helping society become resilient to AI is going to be incredibly important. Much more to come here! The OpenAI Foundation (@FoundationOAI) AI is advancing quickly. Society’s ability to manage its risks must advance just as fast. Today we’re sharing our vision for AI Resilience, with more than $130M in initial grants underway across bio-resilience, cyber-resilience, AI model safety, and AI’s impact on young people: openaifoundation.org/news/re… Video — https://nitter.net/FoundationOAI/status/2061463726407155795#m",
+                "url": "https://nitter.net/sama/status/2061562575322492937#m",
+                "source": "@sama",
+                "date": "Mon, 01 Jun 2026 21:36:34 GMT",
+                "metrics": {}
+              },
+              {
+                "title": "OpenAI Robotics is hiring, looking for exceptional full-stack hardware, ops, systems, and ML engineers to help us progra",
+                "summary": "OpenAI Robotics is hiring, looking for exceptional full-stack hardware, ops, systems, and ML engineers to help us program and manufacture robots that are useful for society. AI should be able to help people in the physical world. In the short term, we are focused on robots to support skilled workers to build our future infrastructure; in the long term, we imagine everyone having a personal robot doing anything they need. Our world simulation research program, led by Aditya Ramesh ( @model_mechanic ), has evolved over the past year into OpenAI Robotics. Progress is rapid, and based on a foundation of co-design between robotics hardware and ML research. If you love working hands-on across the robotics stack and want to build the future, please consider joining us. Send an email with your background and evidence of exceptional accomplishment to: robotics-recruiting@openai.com",
+                "url": "https://nitter.net/sama/status/2061117302528188712#m",
+                "source": "@sama",
+                "date": "Sun, 31 May 2026 16:07:13 GMT",
+                "metrics": {}
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM03_multiturn_send_after_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Action boundary: chi goi send sau khi co xac nhan ro rang trong context."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Dang thong bao nay len Telegram: Ban tin AI da san sang."
+        },
+        {
+          "role": "user",
+          "content": "Chua gui voi, chi chuan bi"
+        },
+        {
+          "role": "user",
+          "content": "OK, toi xac nhan gui"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "Ban tin AI da san sang.",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Ban tin AI da san sang.",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "status": "sent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM04_multiturn_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn social search: carry topic GPT-5, apply Top va limit=3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Twitter dang noi gi ve GPT-5?"
+        },
+        {
+          "role": "user",
+          "content": "Chi lay top/pho bien thoi"
+        },
+        {
+          "role": "user",
+          "content": "Lay 3 bai"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "GPT-5",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "GPT-5",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "GPT-5",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=GPT-5&search_type=Top"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM05_multiturn_query_expand",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn voi tool moi: carry topic sang dang tieng Viet, language=vi, intent=news, max_variants=5."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tao query cho semiconductor supply chain"
+        },
+        {
+          "role": "user",
+          "content": "Bang tieng Viet"
+        },
+        {
+          "role": "user",
+          "content": "5 phuong an, uu tien dang tin tuc"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "chuỗi cung ứng bán dẫn",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "chuỗi cung ứng bán dẫn",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_expand",
+          "args": {
+            "topic": "chuỗi cung ứng bán dẫn",
+            "intent": "news",
+            "language": "vi",
+            "max_variants": 5
+          },
+          "result": {
+            "tool": "query_expand",
+            "topic": "chuỗi cung ứng bán dẫn",
+            "intent": "news",
+            "language": "vi",
+            "queries": [
+              "chuỗi cung ứng bán dẫn",
+              "chuỗi cung ứng bán dẫn tin moi nhat",
+              "chuỗi cung ứng bán dẫn hom nay",
+              "chuỗi cung ứng bán dẫn tuan nay",
+              "chuỗi cung ứng bán dẫn dien bien gan day"
+            ],
+            "count": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_github_search_repo",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "GitHub repo discovery -> github_search repositories."
+      },
+      "input": "Tim tren GitHub cac repository ve streamlit dashboard",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "search_type": "repositories"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "streamlit dashboard",
+              "search_type": "repositories"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "github_search",
+          "args": {
+            "query": "streamlit dashboard",
+            "search_type": "repositories"
+          },
+          "result": {
+            "tool": "github_search",
+            "query": "streamlit dashboard",
+            "search_type": "repositories",
+            "count": 5,
+            "items": [
+              {
+                "title": "Sven-Bo/streamlit-sales-dashboard",
+                "url": "https://github.com/Sven-Bo/streamlit-sales-dashboard",
+                "source": "github.com",
+                "summary": "Interactive Streamlit dashboard visualizing sales data from Excel with dynamic filters and key KPIs.",
+                "stars": 364,
+                "language": "Python",
+                "updated_at": "2026-05-21T16:04:20Z"
+              },
+              {
+                "title": "dataprofessor/population-dashboard",
+                "url": "https://github.com/dataprofessor/population-dashboard",
+                "source": "github.com",
+                "summary": "A dashboard web app template built in Python using Streamlit.",
+                "stars": 216,
+                "language": "Jupyter Notebook",
+                "updated_at": "2026-04-30T20:42:53Z"
+              },
+              {
+                "title": "hackingthemarkets/streamlit-dashboards",
+                "url": "https://github.com/hackingthemarkets/streamlit-dashboards",
+                "source": "github.com",
+                "summary": "Streamlit dashboard examples - Twitter cashtags, StockTwits, WSB, Charts, SQL Pattern Scanner",
+                "stars": 197,
+                "language": "Python",
+                "updated_at": "2026-04-24T05:37:16Z"
+              },
+              {
+                "title": "jrieke/best-of-streamlit",
+                "url": "https://github.com/jrieke/best-of-streamlit",
+                "source": "github.com",
+                "summary": "🏆 A ranked gallery of awesome streamlit apps built by the community",
+                "stars": 1391,
+                "language": null,
+                "updated_at": "2026-06-02T02:51:39Z"
+              },
+              {
+                "title": "shamiraty/Streamlit-Dashboard-Descriptive-Analytics-with-MYSQL",
+                "url": "https://github.com/shamiraty/Streamlit-Dashboard-Descriptive-Analytics-with-MYSQL",
+                "source": "github.com",
+                "summary": "Streamlit Dashboard Descriptive Analytics with MYSQL",
+                "stars": 198,
+                "language": "Python",
+                "updated_at": "2026-05-15T21:18:53Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_hn_search_story",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Hacker News request -> hn_search."
+      },
+      "input": "Tim Hacker News stories ve AI agents",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "search_type": "story"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hn_search",
+            "args": {
+              "query": "AI agents",
+              "search_type": "story"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hn_search",
+          "args": {
+            "query": "AI agents",
+            "search_type": "story"
+          },
+          "result": {
+            "tool": "hn_search",
+            "query": "AI agents",
+            "search_type": "story",
+            "count": 5,
+            "items": [
+              {
+                "title": "An AI agent published a hit piece on me",
+                "url": "https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/",
+                "source": "news.ycombinator.com",
+                "summary": "Previously: <i>AI agent opens a PR write a blogpost to shames the maintainer who closes it</i> - <a href=\"https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=46987559\">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=46987559</a> - Feb 2026 (582 comments)",
+                "author": "scottshambaugh",
+                "points": 2346,
+                "comments": 951,
+                "created_at": "2026-02-12T16:23:24Z"
+              },
+              {
+                "title": "OpenCode – Open source AI coding agent",
+                "url": "https://opencode.ai/",
+                "source": "news.ycombinator.com",
+                "summary": "",
+                "author": "rbanffy",
+                "points": 1274,
+                "comments": 619,
+                "created_at": "2026-03-20T21:03:52Z"
+              },
+              {
+                "title": "AI agent opens a PR write a blogpost to shames the maintainer who closes it",
+                "url": "https://github.com/matplotlib/matplotlib/pull/31132",
+                "source": "news.ycombinator.com",
+                "summary": "",
+                "author": "wrxd",
+                "points": 953,
+                "comments": 750,
+                "created_at": "2026-02-12T11:46:01Z"
+              },
+              {
+                "title": "Opus 4.5 is not the normal AI agent experience that I have had thus far",
+                "url": "https://burkeholland.github.io/posts/opus-4-5-change-everything/",
+                "source": "news.ycombinator.com",
+                "summary": "",
+                "author": "tbassetto",
+                "points": 879,
+                "comments": 1353,
+                "created_at": "2026-01-06T17:45:37Z"
+              },
+              {
+                "title": "An AI agent deleted our production database. The agent's confession is below",
+                "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
+                "source": "news.ycombinator.com",
+                "summary": "",
+                "author": "jeremyccrane",
+                "points": 860,
+                "comments": 1032,
+                "created_at": "2026-04-26T16:27:29Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_wikipedia_background",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Wikipedia background request -> wikipedia_summary, khong lookup."
+      },
+      "input": "Lay tom tat Wikipedia ve Transformer neural network",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wikipedia_summary",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "wikipedia_summary",
+            "args": {
+              "query": "Transformer neural network",
+              "language": "vi"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "wikipedia_summary",
+          "args": {
+            "query": "Transformer neural network",
+            "language": "vi"
+          },
+          "result": {
+            "tool": "wikipedia_summary",
+            "query": "Transformer neural network",
+            "language": "vi",
+            "items": [
+              {
+                "title": "Mạng thần kinh nhân tạo",
+                "url": "https://vi.wikipedia.org/wiki/M%E1%BA%A1ng_th%E1%BA%A7n_kinh_nh%C3%A2n_t%E1%BA%A1o",
+                "source": "vi.wikipedia.org",
+                "summary": "Não người hoạt động nhờ mạng lưới khoảng 86 tỷ tế bào thần kinh kết nối với nhau, truyền tín hiệu điện hóa để xử lý thông tin hay đưa ra quyết định. Mạng thần kinh nhân tạo là một mô hình học máy lấy cảm hứng từ cấu trúc đó: nó được cấu tạo thành từ các đơn vị xử lý đơn giản, kết nối với nhau theo lớp, cùng nhau học cách biểu diễn thông tin phức tạp từ dữ liệu. Nhờ vậy, mạng thần kinh nhân tạo có thể thực hiện các nhiệm vụ mà lập trình thủ công theo quy tắc gặp nhiều khó khăn, như nhận diện hình ảnh, dịch ngôn ngữ, hay tổng hợp giọng nói.",
+                "description": "mô hình toán học hay mô hình tính toán được xây dựng dựa trên các mạng neural sinh học"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_rss_feed_read",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Explicit RSS feed URL -> rss_read."
+      },
+      "input": "Doc 3 muc moi tu RSS feed https://hnrss.org/frontpage",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "rss_read",
+            "args": {
+              "feed_url": "https://hnrss.org/frontpage",
+              "max_items": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "rss_read",
+            "args": {
+              "feed_url": "https://hnrss.org/frontpage",
+              "max_items": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "rss_read",
+          "args": {
+            "feed_url": "https://hnrss.org/frontpage",
+            "max_items": 3
+          },
+          "result": {
+            "tool": "rss_read",
+            "error": "ConnectionError",
+            "message": "('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM07_discord_after_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Discord action chi duoc goi sau khi xac nhan."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Gui vao Discord: Research agent da pass eval."
+        },
+        {
+          "role": "user",
+          "content": "Khoan gui nhe"
+        },
+        {
+          "role": "user",
+          "content": "Toi xac nhan gui Discord"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "discord_send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "discord_send",
+            "args": {
+              "text": "Research agent da pass eval.",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "discord_send",
+          "args": {
+            "text": "Research agent da pass eval.",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "discord_send",
+            "status": "sent",
+            "status_code": 204
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_format_bullets",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yeu cau format item co san -> format tool, khong fetch/lookup."
+      },
+      "input": "Format cac item co san nay thanh markdown bullets: 1) OpenAI ra mat model moi - https://openai.com 2) GitHub co repo agent moi - https://github.com",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format",
+            "args": {
+              "template": "bullets"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "format",
+            "args": {
+              "items": [
+                {
+                  "title": "OpenAI ra mat model moi",
+                  "url": "https://openai.com"
+                },
+                {
+                  "title": "GitHub co repo agent moi",
+                  "url": "https://github.com"
+                }
+              ],
+              "template": "bullets"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "format",
+          "args": {
+            "items": [
+              {
+                "title": "OpenAI ra mat model moi",
+                "url": "https://openai.com"
+              },
+              {
+                "title": "GitHub co repo agent moi",
+                "url": "https://github.com"
+              }
+            ],
+            "template": "bullets"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "bullets",
+            "markdown": "- OpenAI ra mat model moi - [openai.com](https://openai.com)\n- GitHub co repo agent moi - [github.com](https://github.com)",
+            "item_count": 2
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "transcript_id": "v7_openrouter_ui_20260602T162104592388",
+  "version": "v7",
+  "artifact_version": "v7+pd196a96b3700+tde3933158338",
+  "prompt_hash": "d196a96b3700ff78f9ee81a14eb8ce50ca2dd8f40bb5a757c1b10b78c3c21bb0",
+  "tools_hash": "de39331583380f777d0234ec24d201ac26ba98540d09ecafcfb3cf035dab21dd",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\tools.yaml",
+  "created_at": "2026-06-02T16:21:04",
+  "updated_at": "2026-06-02T16:21:04",
+  "surface": "streamlit",
+  "turns": []
+}

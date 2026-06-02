@@ -189,6 +189,10 @@ def env_table() -> list[dict[str, str]]:
         "RAPIDAPI_KEY",
         "TELEGRAM_BOT_TOKEN",
         "TELEGRAM_CHAT_ID",
+        "DISCORD_WEBHOOK_URL",
+        "RESEND_API",
+        "RESEND_FROM",
+        "GITHUB_TOKEN",
     ]
     return [{"Variable": key, "Status": "present" if os.getenv(key) else "missing"} for key in keys]
 
@@ -229,7 +233,7 @@ def main() -> None:
     with st.sidebar:
         st.title("Research Agent")
         provider_name = st.selectbox("Provider", ["openrouter", "openai", "anthropic", "gemini"], index=0)
-        version = st.text_input("Version", value="v4")
+        version = st.text_input("Version", value="v7")
         model_override = st.text_input("Model override", value="")
         history_window = st.slider("History window", min_value=1, max_value=10, value=5)
         max_tool_rounds = st.slider("Tool rounds", min_value=1, max_value=6, value=4)

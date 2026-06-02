@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+import re
+import xml.etree.ElementTree as ET
 from typing import Any
 
 import requests
@@ -43,10 +45,67 @@ def _tweets_from(data: dict[str, Any], limit: int) -> list[dict[str, Any]]:
     return items[: int(limit or 5)]
 
 
+def _text(element: ET.Element | None, default: str = "") -> str:
+    if element is None or element.text is None:
+        return default
+    return re.sub(r"\s+", " ", element.text).strip()
+
+
+def _child(element: ET.Element, name: str) -> ET.Element | None:
+    found = element.find(name)
+    if found is not None:
+        return found
+    for child in element:
+        if child.tag.endswith("}" + name) or child.tag == name:
+            return child
+    return None
+
+
+def _strip_html(value: str) -> str:
+    value = re.sub(r"<[^>]+>", " ", value or "")
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _nitter_timeline(screenname: str, limit: int) -> list[dict[str, Any]]:
+    base_url = os.getenv("NITTER_BASE_URL", "https://nitter.net").rstrip("/")
+    response = requests.get(
+        f"{base_url}/{screenname}/rss",
+        headers={"User-Agent": "day04-research-agent"},
+        timeout=TIMEOUT,
+    )
+    response.raise_for_status()
+    root = ET.fromstring(response.content)
+    channel = root.find("channel")
+    if channel is None:
+        return []
+    items: list[dict[str, Any]] = []
+    for entry in channel.findall("item")[: int(limit or 5)]:
+        title = _text(_child(entry, "title"), "Untitled")
+        summary = _strip_html(_text(_child(entry, "description"))) or title
+        link = _text(_child(entry, "link"))
+        items.append({
+            "title": title.split("\n")[0][:120],
+            "summary": summary,
+            "url": link,
+            "source": f"@{screenname}",
+            "date": _text(_child(entry, "pubDate")),
+            "metrics": {},
+        })
+    return items
+
+
 def get_user_tweets(screenname: str = "", limit: int = 5) -> dict[str, Any]:
     try:
-        data = _twitter_get("/timeline.php", {"screenname": screenname})
-        return {"tool": "get_user_tweets", "screenname": screenname, "items": _tweets_from(data, limit)}
+        try:
+            data = _twitter_get("/timeline.php", {"screenname": screenname})
+            items = _tweets_from(data, limit)
+            source = "rapidapi"
+        except Exception as rapidapi_exc:
+            items = _nitter_timeline(screenname, limit)
+            source = "nitter_rss"
+            if not items:
+                raise rapidapi_exc
+        return {"tool": "get_user_tweets", "screenname": screenname, "source": source, "items": items}
     except Exception as exc:
         return err("get_user_tweets", exc)
 
