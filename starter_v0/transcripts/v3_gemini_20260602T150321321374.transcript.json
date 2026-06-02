@@ -1,0 +1,24 @@
+{
+  "transcript_id": "v3_gemini_20260602T150321321374",
+  "version": "v3",
+  "artifact_version": "v3+p5ad20a5002e2+t11533c32c70c",
+  "prompt_hash": "5ad20a5002e24e994edfc3ed2266926d4f8398bfba62a9f9aa4d5b8208cdd4b2",
+  "tools_hash": "11533c32c70cb53c5d7b5cf6255c6ac0c440826449fa9e8455c33f152b6dac32",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash-lite",
+  "system_prompt": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/tools.yaml",
+  "created_at": "2026-06-02T15:03:21",
+  "updated_at": "2026-06-02T15:03:22",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T15:03:21",
+      "user": "Hãy gửi tin tức AI nổi bật trong hôm nay",
+      "status": "provider_error",
+      "error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+      "ended_at": "2026-06-02T15:03:22"
+    }
+  ],
+  "ui": "streamlit"
+}

@@ -1,0 +1,73 @@
+{
+  "transcript_id": "v3_gemini_20260602T134946216695",
+  "version": "v3",
+  "artifact_version": "v3+p30b58decde47+t26181b36a52d",
+  "prompt_hash": "30b58decde4798c90ae6de4098a13d298cecfdef0d94b2ce77ab22dff2b58927",
+  "tools_hash": "26181b36a52dc3eebc5baf4d3b44ed6b2226dcf26f23aa5a18a99b1d6f16b8c0",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash-lite",
+  "system_prompt": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/tools.yaml",
+  "created_at": "2026-06-02T13:49:46",
+  "updated_at": "2026-06-02T13:49:49",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T13:49:46",
+      "user": "Tweet mới nhất của Sam Altman là gì?",
+      "status": "answered",
+      "assistant_text": "I am sorry, I cannot fulfill this request. The available tools are not working correctly. Please try again later.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "error": "RuntimeError",
+                "message": "Missing RAPIDAPI_KEY env var"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "I am sorry, I cannot fulfill this request. The available tools are not working correctly. Please try again later.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 1
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "error": "RuntimeError",
+            "message": "Missing RAPIDAPI_KEY env var"
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T13:49:49"
+    }
+  ],
+  "ui": "streamlit"
+}

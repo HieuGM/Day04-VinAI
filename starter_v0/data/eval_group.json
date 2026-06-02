@@ -1,7 +1,108 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "description": "Team eval: 5 single-turn + 5 multi-turn cases covering routing, args, clarify, resolve_handle, and policy.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_resolve_handle_sam",
+      "phase": "B",
+      "query": "Handle Twitter chính thức của tên hiển thị 'Sam Altman' là gì?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "resolve_handle", "args": {"display_name": "Sam Altman"}}]},
+      "metadata": {"what_it_tests": "Chỉ hỏi mapping tên→handle → resolve_handle, không timeline."}
+    },
+    {
+      "id": "G02_karpathy_timeline_limit",
+      "phase": "B",
+      "query": "Lấy 3 tweet mới nhất của Andrej Karpathy",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "karpathy", "limit": 3}}]},
+      "metadata": {"what_it_tests": "Map Andrej Karpathy → karpathy và limit=3."}
+    },
+    {
+      "id": "G03_lookup_general_not_news",
+      "phase": "B",
+      "query": "Tìm trên web tổng quan về RAG evaluation benchmarks (không cần tin tức hôm nay)",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"topic": "general"}}]},
+      "metadata": {"what_it_tests": "Tra cứu chung → topic=general, không ép news/day."}
+    },
+    {
+      "id": "G04_unnecessary_after_meta",
+      "phase": "B",
+      "query": "Bạn có thể tóm tắt tweet không? Trả lời ngắn khả năng, đừng gọi tool.",
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
+      "metadata": {"what_it_tests": "User yêu cầu không gọi tool → trả lời meta."}
+    },
+    {
+      "id": "G05_clarify_missing_channel_text",
+      "phase": "B",
+      "query": "Gửi giúp mình đoạn này lên Telegram",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"what_it_tests": "Gửi Telegram thiếu nội dung/xác nhận → clarify yes_no, không send."}
+    },
+    {
+      "id": "G06_multiturn_handle_then_timeline",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Cho mình biết handle Twitter của Sam Altman"},
+        {"role": "user", "content": "Giờ lấy 2 tweet mới nhất của handle đó"},
+        {"role": "user", "content": "Vẫn Sam Altman, giữ limit 2"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "sama", "limit": 2}}]},
+      "metadata": {"what_it_tests": "Multiturn: latest turn lấy tweet sama limit=2 sau khi đã biết handle."}
+    },
+    {
+      "id": "G07_multiturn_switch_to_top_search",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Tweet mới nhất về Claude trên X"},
+        {"role": "user", "content": "Không cần latest nữa, cho top tweet về Claude"},
+        {"role": "user", "content": "Chỉ Claude thôi"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "Claude", "search_type": "Top"}}]},
+      "metadata": {"what_it_tests": "Sửa sang search_type=Top theo lượt mới nhất."}
+    },
+    {
+      "id": "G08_multiturn_carry_week_news",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Tin công nghệ trong tuần này"},
+        {"role": "user", "content": "Riêng phần chip AI thì sao?"},
+        {"role": "user", "content": "Chỉ chip AI, vẫn trong tuần này"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "chip AI", "topic": "news", "timeframe": "week"}}]},
+      "metadata": {"what_it_tests": "Carry timeframe=week + topic=news, query chip AI."}
+    },
+    {
+      "id": "G09_multiturn_clarify_url_then_fetch",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Đọc bài này giúp mình"},
+        {"role": "user", "content": "https://openai.com/research/index/"},
+        {"role": "user", "content": "Chỉ URL vừa gửi"}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://openai.com/research/index/"}}]},
+      "metadata": {"what_it_tests": "Sau khi có URL, fetch đúng link ở lượt cuối."}
+    },
+    {
+      "id": "G10_multiturn_policy_area",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Theo policy công ty, tool nào được phép dùng khi research?"},
+        {"role": "user", "content": "Chỉ phần tool usage policy"},
+        {"role": "user", "content": "Trả lời theo policy, không search web"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "policy", "args": {"policy_area": "tool_usage"}}]},
+      "metadata": {"what_it_tests": "Latest turn → policy tool_usage, không lookup."}
+    }
+  ]
 }

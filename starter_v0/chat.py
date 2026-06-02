@@ -41,19 +41,47 @@ def trim_history(history: list[dict[str, str]], window: int) -> list[dict[str, s
     return history[-window * 2:]
 
 
-def execute_tool_call(call: ToolCall) -> dict[str, Any]:
+def _lookup_items_from_event(event: dict[str, Any]) -> list[dict[str, Any]] | None:
+    if event.get("tool") != "lookup":
+        return None
+    result = event.get("result")
+    if not isinstance(result, dict):
+        return None
+    items = result.get("items")
+    return items if items else None
+
+
+def _latest_lookup_items(events: list[dict[str, Any]]) -> list[dict[str, Any]] | None:
+    for event in reversed(events):
+        items = _lookup_items_from_event(event)
+        if items:
+            return items
+    return None
+
+
+def execute_tool_call(
+    call: ToolCall,
+    *,
+    prior_lookup_items: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     func = TOOL_FUNCTIONS.get(call.name)
+    args = dict(call.args)
+    if call.name == "send_email":
+        text_empty = not (args.get("text") or "").strip()
+        items_empty = not args.get("items")
+        if text_empty and items_empty and prior_lookup_items:
+            args["items"] = prior_lookup_items
     if not func:
         return {
             "tool": call.name,
-            "args": call.args,
+            "args": args,
             "result": {"error": "unknown_tool", "message": f"No local implementation for {call.name}"},
         }
     try:
-        result = func(**call.args)
+        result = func(**args)
     except Exception as exc:
         result = {"error": type(exc).__name__, "message": str(exc)}
-    return {"tool": call.name, "args": call.args, "result": result}
+    return {"tool": call.name, "args": args, "result": result}
 
 
 def tool_results_message(events: list[dict[str, Any]]) -> dict[str, str]:
@@ -63,7 +91,9 @@ def tool_results_message(events: list[dict[str, Any]]) -> dict[str, str]:
             "TOOL_RESULTS_JSON:\n"
             f"{json_text(events, max_chars=24000)}\n\n"
             "Use only these tool results. If the user asked for a digest and the items are ready, "
-            "call the formatting tool. Otherwise answer the user directly with cited sources when available."
+            "call the formatting tool. If sending email and lookup items are available, call "
+            "`send_email` with `items` from lookup (or `text` from format markdown). "
+            "Otherwise answer the user directly with cited sources when available."
         ),
     }
 
@@ -110,12 +140,17 @@ def run_model_tool_loop(
 
         working_messages.append(assistant_tool_message(response.text, calls))
         non_clarification_events: list[dict[str, Any]] = []
+        cached_lookup_items = _latest_lookup_items(all_tool_events)
 
         for call in calls:
             print(f"🔧 {call.name}({json.dumps(call.args, ensure_ascii=False, sort_keys=True)})")
-            event = execute_tool_call(call)
+            event = execute_tool_call(call, prior_lookup_items=cached_lookup_items)
             round_record["tool_results"].append(event)
             all_tool_events.append(event)
+
+            new_items = _lookup_items_from_event(event)
+            if new_items:
+                cached_lookup_items = new_items
 
             # Detect the clarification/pause tool by its output flag (rename-proof),
             # not by a hard-coded tool name.

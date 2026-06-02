@@ -1,0 +1,156 @@
+{
+  "transcript_id": "v3_gemini_20260602T150355260169",
+  "version": "v3",
+  "artifact_version": "v3+p5ad20a5002e2+t11533c32c70c",
+  "prompt_hash": "5ad20a5002e24e994edfc3ed2266926d4f8398bfba62a9f9aa4d5b8208cdd4b2",
+  "tools_hash": "11533c32c70cb53c5d7b5cf6255c6ac0c440826449fa9e8455c33f152b6dac32",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash-lite",
+  "system_prompt": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/tools.yaml",
+  "created_at": "2026-06-02T15:03:55",
+  "updated_at": "2026-06-02T15:04:25",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T15:03:55",
+      "user": "Tweet mới nhất của Sam Altman là gì?",
+      "status": "answered",
+      "assistant_text": "The latest tweet from Sam Altman says: \"The OpenAI Foundation is doing a lot of wonderful things. Helping society become resilient to AI is going to be incredibly important. Much more to come here!\" (https://x.com/sama/status/2061562575322492937)",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "screenname": "sama",
+                "items": [
+                  {
+                    "title": "The OpenAI Foundation is doing a lot of wonderful things.",
+                    "summary": "The OpenAI Foundation is doing a lot of wonderful things.\n\nHelping society become resilient to AI is going to be incredibly important. Much more to come here!",
+                    "url": "https://x.com/sama/status/2061562575322492937",
+                    "source": "@sama",
+                    "date": "Mon Jun 01 21:36:34 +0000 2026",
+                    "metrics": {
+                      "favorites": 1670,
+                      "retweets": 131,
+                      "views": "239933"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "The latest tweet from Sam Altman says: \"The OpenAI Foundation is doing a lot of wonderful things. Helping society become resilient to AI is going to be incredibly important. Much more to come here!\" (https://x.com/sama/status/2061562575322492937)",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 1
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "sama",
+            "items": [
+              {
+                "title": "The OpenAI Foundation is doing a lot of wonderful things.",
+                "summary": "The OpenAI Foundation is doing a lot of wonderful things.\n\nHelping society become resilient to AI is going to be incredibly important. Much more to come here!",
+                "url": "https://x.com/sama/status/2061562575322492937",
+                "source": "@sama",
+                "date": "Mon Jun 01 21:36:34 +0000 2026",
+                "metrics": {
+                  "favorites": 1670,
+                  "retweets": 131,
+                  "views": "239933"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T15:04:00"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-06-02T15:04:21",
+      "user": "Hãy gửi tin tức mới nhất về AI trong hôm nay",
+      "status": "answered",
+      "assistant_text": "Xin lỗi, tôi không thể lấy tin tức mới nhất về AI trong hôm nay do có lỗi xảy ra với công cụ tìm kiếm.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "topic": "news",
+                "timeframe": "day"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "topic": "news",
+                "timeframe": "day"
+              },
+              "result": {
+                "tool": "web_search",
+                "error": "HTTPError",
+                "message": "400 Client Error: Bad Request for url: https://api.tavily.com/search"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Xin lỗi, tôi không thể lấy tin tức mới nhất về AI trong hôm nay do có lỗi xảy ra với công cụ tìm kiếm.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "error": "HTTPError",
+            "message": "400 Client Error: Bad Request for url: https://api.tavily.com/search"
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T15:04:25"
+    }
+  ],
+  "ui": "streamlit"
+}

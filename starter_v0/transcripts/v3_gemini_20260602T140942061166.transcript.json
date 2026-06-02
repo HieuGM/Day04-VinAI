@@ -1,0 +1,73 @@
+{
+  "transcript_id": "v3_gemini_20260602T140942061166",
+  "version": "v3",
+  "artifact_version": "v3+p30b58decde47+t26181b36a52d",
+  "prompt_hash": "30b58decde4798c90ae6de4098a13d298cecfdef0d94b2ce77ab22dff2b58927",
+  "tools_hash": "26181b36a52dc3eebc5baf4d3b44ed6b2226dcf26f23aa5a18a99b1d6f16b8c0",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash-lite",
+  "system_prompt": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/phamduythai/Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student/starter_v0/artifacts/tools.yaml",
+  "created_at": "2026-06-02T14:09:42",
+  "updated_at": "2026-06-02T14:09:45",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T14:09:42",
+      "user": "Tweet mới nhất của Sam Altman là gì?",
+      "status": "answered",
+      "assistant_text": "Xin lỗi, tôi không thể lấy được tweet mới nhất của Sam Altman do lỗi kết nối.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 1
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "error": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c', port=443): Max retries exceeded with url: /timeline.php?screenname=sama (Caused by NameResolutionError(\"HTTPSConnection(host='16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c', port=443): Failed to resolve '16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c' ([Errno 8] nodename nor servname provided, or not known)\"))"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Xin lỗi, tôi không thể lấy được tweet mới nhất của Sam Altman do lỗi kết nối.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 1
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "error": "ConnectionError",
+            "message": "HTTPSConnectionPool(host='16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c', port=443): Max retries exceeded with url: /timeline.php?screenname=sama (Caused by NameResolutionError(\"HTTPSConnection(host='16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c', port=443): Failed to resolve '16b8a98495mshaa86a0735a62acbp15bc89jsnc43de8a66f3c' ([Errno 8] nodename nor servname provided, or not known)\"))"
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T14:09:45"
+    }
+  ],
+  "ui": "streamlit"
+}

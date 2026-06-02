@@ -1,1 +1,5 @@
 version,author,changed_artifact,artifact_version,prompt_hash,tools_hash,reason,hypothesis,metric_before,metric_after,run_file
+v0,team,artifacts/prompts/v0_baseline_system_prompt.md,v0+pf0c107a9d7a1+t7656ad56ebb4,pf0c107a9d7a1,7656ad56ebb4,Baseline starter (đoán bừa),Đo điểm xuất phát,,0.8333,runs/v0_B_base_gemini_20260602T124233297708.json
+v1,team,artifacts/prompts/v1_system_prompt.md,v1+p8eb27fdc7712+t7656ad56ebb4,p8eb27fdc7712,7656ad56ebb4,clarify + no_tool,Giảm đoán handle/URL,0.8333,0.8,runs/v1_B_base_gemini_20260602T124258824819.json
+v2,team,artifacts/prompts/v2_system_prompt.md,v2+pa0b7900540a9+t7656ad56ebb4,pa0b7900540a9,7656ad56ebb4,Bảng routing trong prompt,Đúng timeline vs social_search,0.8,0.6667,runs/v2_B_base_gemini_20260602T124317054740.json
+v3,team,artifacts/system_prompt.md + tools.yaml,v3+pde6253d1b2f9+t7656ad56ebb4,pde6253d1b2f9,7656ad56ebb4,Final prompt + tool descriptions,Parallel/multiturn/send; partial do quota,0.6667,0.75,runs/v3_B_base_gemini_20260602T124843798720.json
