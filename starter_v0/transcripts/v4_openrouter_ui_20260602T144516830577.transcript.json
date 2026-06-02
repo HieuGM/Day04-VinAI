@@ -1,0 +1,332 @@
+{
+  "transcript_id": "v4_openrouter_ui_20260602T144516830577",
+  "version": "v4",
+  "artifact_version": "v4+p81948fcb9d2e+td7ade8db87e5",
+  "prompt_hash": "81948fcb9d2ec74b891b016eca605692821453869b6ee94a0210655ceef97fea",
+  "tools_hash": "d7ade8db87e54e79a0aaf167da2de4b21ddda5b765a191cb40aa0e3c4de72ba1",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\tools.yaml",
+  "created_at": "2026-06-02T14:45:16",
+  "updated_at": "2026-06-02T14:48:01",
+  "surface": "streamlit",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T14:45:32",
+      "user": "tin AI hôm nay có gì hay",
+      "status": "answered",
+      "assistant_text": "Here are some interesting AI news highlights from today:\n\n1. **AI expected to drive £18bn of UK digital ad spend by 2030** - According to IAB UK, AI is projected to account for one-third of the UK's digital ad spend by 2030, which is approximately £18 billion. This growth is expected to come from AI-driven tools in search, social media, and display advertising. [Read more](https://www.marketingweek.com/iab-uk-ai-ad-spend/) (Source: Marketing Week)\n\n2. **40% of executives thought AI could save up to 20%. It didn’t deliver.** - A Bain report reveals that many companies are increasing their AI budgets despite not seeing significant productivity gains. Only 40% of companies reported cost savings of less than 10% from their AI initiatives. [Read more](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver) (Source: PitchBook)\n\n3. **AI ad campaigns slam Trahan** - An AI safety group has launched a significant ad campaign against Rep. Lori Trahan, criticizing her legislative efforts regarding AI. The campaign highlights concerns about AI regulation and the influence of major AI companies. [Read more](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/) (Source: The Washington Post)\n\n4. **AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says** - A report indicates that many executives are uncomfortable with the gap between AI spending and productivity gains, urging companies to better utilize their data for AI initiatives. [Read more](https://www.insurancejournal.com/news/national/2026/06/01/871951.htm) (Source: Insurance Journal)\n\n5. **New Report: The AI Rebuild of Travel** - The travel industry is undergoing significant changes as AI reshapes how trips are discovered, booked, and managed. The report discusses the challenges and opportunities presented by AI in travel technology. [Read more](https://skift.com/insights/the-ai-rebuild-of-travel/) (Source: Skift)\n\nLet me know if you need more information on any of these topics!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day"
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "AI expected to drive £18bn of UK digital ad spend by 2030 - Marketing Week",
+                    "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                    "source": "marketingweek.com",
+                    "summary": "# AI expected to drive £18bn of UK digital ad spend by 2030. IAB UK forecasts AI will drive one-third of UK digital ad spend by 2030 as advertisers adapt to changes in search, content and media buying. One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK. According to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce. To estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm. IAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.",
+                    "score": 0.80069196
+                  },
+                  {
+                    "title": "40% of executives thought AI could save up to 20%. It didn’t deliver. - PitchBook",
+                    "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver",
+                    "source": "pitchbook.com",
+                    "summary": "## The gap between AI spending and productivity gains “should be making executives uncomfortable,” a Bain report found. Corporates are beefing up their AI budgets but seeing lackluster productivity gains, according to the latest Bain & Company report. Bain’s Automation and AI Pathfinder Survey 2026, which had 951 respondents, found that 40% of the companies that tracked their spending recorded cost savings of less than 10% from their AI initiatives. Still, 90% of those surveyed whose AI investments underdelivered plan to increase their AI budgets next year. As compute and usage costs have risen dramatically, executives and shareholders are taking a closer look at the returns that those investments have brought so far. A PitchBook analysis of 186 AI-related questions on B2C earnings calls found that 90% were probing and investigative in tone, and that ROI and financial returns have overtaken product roadmaps as the dominant focus. Employees’ use of AI tools can range from coding assistants to AI-generated research to organizing unstructured databases.",
+                    "score": 0.26990628
+                  },
+                  {
+                    "title": "AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan - The Washington Post",
+                    "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/",
+                    "source": "washingtonpost.com",
+                    "summary": "AI & Tech Brief from WP Intelligence. # AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan. Plus, Anthropic files for a blockbuster initial public offering. Make us preferred on Google. Sign up here to get this newsletter in your inbox. * **Exclusive:** AI safety group Americans for Responsible Innovation rolls out a six-figure ad campaign this week attacking Rep. Lori Trahan (D-Massachusetts), arguing that she’s “taking the side” of AI oligarchs in her bipartisan legislative efforts. * The AI safety community doesn’t want to hand power of AI regulation to President Donald Trump’s administration now that states are passing more rigorous AI laws — and the California and New York attorneys general are challenging big AI companies. * Nvidia is rolling out a new “world model” simulator for robots and a new design platform for robot developers. In doing so, the company is running the same business playbook it did to become so dominant in the chip market.",
+                    "score": 0.8749346
+                  },
+                  {
+                    "title": "AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says - Insurance Journal",
+                    "url": "https://www.insurancejournal.com/news/national/2026/06/01/871951.htm",
+                    "source": "insurancejournal.com",
+                    "summary": "The missed targets “should be making executives uncomfortable,” especially since many of them are approving increased spending for artificial intelligence on the basis of expected savings, the consulting firm said in a report shared exclusively with Bloomberg News. While some companies are funding fresh investment in generative and agentic AI with realized savings, the largest share (44%) cited targeted savings among their top sources of funding for the next wave of outlays, according to the report. “Despite a decade of investments in data modernization running well into hundreds of billions of dollars globally, the No. 1 reason AI programs underperform is that companies cannot reliably get access to their own data,” Bain said. Its prescription: Instead of waiting to structure all of their data to make it ingestible by AI, companies should start with what’s available to feed into the models — and then use AI to help sort out how to structure the rest.",
+                    "score": 0.22715242
+                  },
+                  {
+                    "title": "New Report: The AI Rebuild of Travel - Skift",
+                    "url": "https://skift.com/insights/the-ai-rebuild-of-travel/",
+                    "source": "skift.com",
+                    "summary": "# New Report: The AI Rebuild of Travel. Travel technology is being rebuilt in real time as AI begins to shape how trips are discovered, booked, and managed. And systems built for websites and manual workflows are struggling to keep pace with a more connected, autonomous future. What once operated as a predictable digital journey is becoming an AI-mediated ecosystem powered by real-time data, interoperability, and increasingly intelligent systems. Skift Studio spoke with 10 senior technology, product, and digital leaders across airlines, hospitality companies, travel platforms, and technology providers to understand how the industry is preparing. One thing is clear: the next era of travel will be defined by infrastructure as much as interface. **Download the report to learn:**. * How AI assistants and agentic experiences are reshaping travel discovery and booking. * Why trust, governance, and identity are becoming central to AI-powered travel. * How airlines, hotels, and platforms are preparing for a more autonomous future.",
+                    "score": 0.20429464
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Here are some interesting AI news highlights from today:\n\n1. **AI expected to drive £18bn of UK digital ad spend by 2030** - According to IAB UK, AI is projected to account for one-third of the UK's digital ad spend by 2030, which is approximately £18 billion. This growth is expected to come from AI-driven tools in search, social media, and display advertising. [Read more](https://www.marketingweek.com/iab-uk-ai-ad-spend/) (Source: Marketing Week)\n\n2. **40% of executives thought AI could save up to 20%. It didn’t deliver.** - A Bain report reveals that many companies are increasing their AI budgets despite not seeing significant productivity gains. Only 40% of companies reported cost savings of less than 10% from their AI initiatives. [Read more](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver) (Source: PitchBook)\n\n3. **AI ad campaigns slam Trahan** - An AI safety group has launched a significant ad campaign against Rep. Lori Trahan, criticizing her legislative efforts regarding AI. The campaign highlights concerns about AI regulation and the influence of major AI companies. [Read more](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/) (Source: The Washington Post)\n\n4. **AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says** - A report indicates that many executives are uncomfortable with the gap between AI spending and productivity gains, urging companies to better utilize their data for AI initiatives. [Read more](https://www.insurancejournal.com/news/national/2026/06/01/871951.htm) (Source: Insurance Journal)\n\n5. **New Report: The AI Rebuild of Travel** - The travel industry is undergoing significant changes as AI reshapes how trips are discovered, booked, and managed. The report discusses the challenges and opportunities presented by AI in travel technology. [Read more](https://skift.com/insights/the-ai-rebuild-of-travel/) (Source: Skift)\n\nLet me know if you need more information on any of these topics!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "AI expected to drive £18bn of UK digital ad spend by 2030 - Marketing Week",
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                "source": "marketingweek.com",
+                "summary": "# AI expected to drive £18bn of UK digital ad spend by 2030. IAB UK forecasts AI will drive one-third of UK digital ad spend by 2030 as advertisers adapt to changes in search, content and media buying. One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK. According to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce. To estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm. IAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.",
+                "score": 0.80069196
+              },
+              {
+                "title": "40% of executives thought AI could save up to 20%. It didn’t deliver. - PitchBook",
+                "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver",
+                "source": "pitchbook.com",
+                "summary": "## The gap between AI spending and productivity gains “should be making executives uncomfortable,” a Bain report found. Corporates are beefing up their AI budgets but seeing lackluster productivity gains, according to the latest Bain & Company report. Bain’s Automation and AI Pathfinder Survey 2026, which had 951 respondents, found that 40% of the companies that tracked their spending recorded cost savings of less than 10% from their AI initiatives. Still, 90% of those surveyed whose AI investments underdelivered plan to increase their AI budgets next year. As compute and usage costs have risen dramatically, executives and shareholders are taking a closer look at the returns that those investments have brought so far. A PitchBook analysis of 186 AI-related questions on B2C earnings calls found that 90% were probing and investigative in tone, and that ROI and financial returns have overtaken product roadmaps as the dominant focus. Employees’ use of AI tools can range from coding assistants to AI-generated research to organizing unstructured databases.",
+                "score": 0.26990628
+              },
+              {
+                "title": "AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan - The Washington Post",
+                "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/",
+                "source": "washingtonpost.com",
+                "summary": "AI & Tech Brief from WP Intelligence. # AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan. Plus, Anthropic files for a blockbuster initial public offering. Make us preferred on Google. Sign up here to get this newsletter in your inbox. * **Exclusive:** AI safety group Americans for Responsible Innovation rolls out a six-figure ad campaign this week attacking Rep. Lori Trahan (D-Massachusetts), arguing that she’s “taking the side” of AI oligarchs in her bipartisan legislative efforts. * The AI safety community doesn’t want to hand power of AI regulation to President Donald Trump’s administration now that states are passing more rigorous AI laws — and the California and New York attorneys general are challenging big AI companies. * Nvidia is rolling out a new “world model” simulator for robots and a new design platform for robot developers. In doing so, the company is running the same business playbook it did to become so dominant in the chip market.",
+                "score": 0.8749346
+              },
+              {
+                "title": "AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says - Insurance Journal",
+                "url": "https://www.insurancejournal.com/news/national/2026/06/01/871951.htm",
+                "source": "insurancejournal.com",
+                "summary": "The missed targets “should be making executives uncomfortable,” especially since many of them are approving increased spending for artificial intelligence on the basis of expected savings, the consulting firm said in a report shared exclusively with Bloomberg News. While some companies are funding fresh investment in generative and agentic AI with realized savings, the largest share (44%) cited targeted savings among their top sources of funding for the next wave of outlays, according to the report. “Despite a decade of investments in data modernization running well into hundreds of billions of dollars globally, the No. 1 reason AI programs underperform is that companies cannot reliably get access to their own data,” Bain said. Its prescription: Instead of waiting to structure all of their data to make it ingestible by AI, companies should start with what’s available to feed into the models — and then use AI to help sort out how to structure the rest.",
+                "score": 0.22715242
+              },
+              {
+                "title": "New Report: The AI Rebuild of Travel - Skift",
+                "url": "https://skift.com/insights/the-ai-rebuild-of-travel/",
+                "source": "skift.com",
+                "summary": "# New Report: The AI Rebuild of Travel. Travel technology is being rebuilt in real time as AI begins to shape how trips are discovered, booked, and managed. And systems built for websites and manual workflows are struggling to keep pace with a more connected, autonomous future. What once operated as a predictable digital journey is becoming an AI-mediated ecosystem powered by real-time data, interoperability, and increasingly intelligent systems. Skift Studio spoke with 10 senior technology, product, and digital leaders across airlines, hospitality companies, travel platforms, and technology providers to understand how the industry is preparing. One thing is clear: the next era of travel will be defined by infrastructure as much as interface. **Download the report to learn:**. * How AI assistants and agentic experiences are reshaping travel discovery and booking. * Why trust, governance, and identity are becoming central to AI-powered travel. * How airlines, hotels, and platforms are preparing for a more autonomous future.",
+                "score": 0.20429464
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T14:45:55"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-06-02T14:46:26",
+      "user": "tóm tắt bài viết này cho tôi",
+      "status": "answered",
+      "assistant_text": "Here’s a summary of the article titled \"AI expected to drive £18bn of UK digital ad spend by 2030\":\n\nAccording to forecasts from IAB UK, AI is projected to account for approximately £18 billion, or one-third (32%), of the UK's digital ad spend by 2030. The report, titled \"The State of AI in Advertising: Charting the Shift from Automation to Autonomy,\" highlights that AI will significantly influence ad spending in areas such as content creation, zero-click search, agentic trading, and agentic commerce.\n\nIAB UK has developed \"AI overlays\" to estimate the proportion of media spend that is AI-driven, which involves decisions made by AI algorithms. The growth is expected to come primarily from AI buying tools in search (like Google’s AI Max), social media (including Meta’s Advantage+), and display advertising through programmatic buying.\n\nThe industry is also experiencing changes in search and discovery, as AI-generated answers are reducing click-through traffic to brand websites. About 74% of advertisers believe that AI summaries are impacting traffic, prompting many to adjust their website structures and content strategies.\n\nWhile AI adoption is increasing, the market is still in a transitional phase, with only 4% of IAB UK members identifying as fully \"agent-first.\" Concerns regarding transparency, governance, and data security are hindering broader adoption, with nearly half of advertisers expressing distrust in AI agents due to a lack of transparency in decision-making.\n\nFor more details, you can read the full article [here](https://www.marketingweek.com/iab-uk-ai-ad-spend/).",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "fetch",
+              "args": {
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "fetch",
+              "args": {
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+              },
+              "result": {
+                "tool": "read_url",
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                "items": [
+                  {
+                    "title": "AI expected to drive £18bn of UK digital ad spend by 2030",
+                    "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                    "source": "marketingweek.com",
+                    "summary": "­\n\n![](https://marketingweek.imgix.net/uploads/2026/04/shutterstock_2578033595-1.jpg?auto=compress,format&crop=faces,entropy,edges&fit=crop&q=60&w=736&h=430)One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK.\n\nAccording to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce.\n\nTo estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm.\n\nIAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.\n\n## Changes to search\n\nMeanwhile, the industry is facing changes to search and discovery as AI-generated answers reduce click-through traffic and shift value towards “share of model” visibility in large language models and AI assistants.\n\nSome 74% of advertisers believe AI summaries are reducing traffic to brand websites. As a result, almost two-thirds say they have already changed website structures, metadata and content strategies in response to the rise of generative engine optimisation (GEO).\n\nIAB UK chief strategy officer James Chandler says marketers will increasingly need to focus on “winning” share of model – a shift from the past two decades, when they focused on share of search.\n\n“As consumers turn to AI assistants for recommendations, research and product discovery, brands need to think beyond rankings and clicks,” he says.\n\n“The challenge is becoming how they’re represented, understood and surfaced within AI-generated responses.”\n\n# [Three quarters of CMOs grappling with AI skills gap](https://www.marketingweek.com/cmos-grappling-ai-skills-gap/)\n\nElsewhere, more than half (58%) of IAB UK members say they are already experimenting with or piloting agentic AI within their organisations, while a further 16% say they are scaling agentic systems or operating “agent-first” marketing workflows.\n\nCreative production is among the most mature AI use cases, with 63% of IAB UK members expecting AI to have an “accelerating or transformative impact” on creative development over the next 12 months.\n\n“The brands that succeed in the AI era will be those that combine strong digital foundations with trust, relevance and authority. As AI becomes a more influential gatekeeper between consumers and brands, being recommended may become just as important as being found,” adds Chandler.\n\nThe report suggests that while AI adoption is rising, the market remains in a “transitional phase” between experimentation and operational transformation.\n\nOnly 4% of IAB UK members currently consider themselves fully “agent-first”, with concerns around transparency, governance, data security and accountability continuing to limit adoption.\n\nTrust also remains a significant concern. Almost half (47%) of advertisers say they do not trust AI agents in advertising because of a lack of transparency in decision-making, rising to 67% among IAB UK members.\n\n### Search anything and hit ‘Enter’\n\nSearch\n\n- [Festival of Marketing](https://www.marketingweek.com/festival-of-marketing/)\n- [Marketing News](https://www.marketingweek.com/marketing-news/)\n- [Insight](https://www.marketingweek.com/insight/)\n- [Columnists](https://www.marketingweek.com/opinion/)\n  - [Helen Edwards](https://www.marketingweek.com/columnist-helen-edwards/)\n  - [Peter Weinberg & Jon Lombardo](https://www.marketingweek.com/peter-weinberg/)\n  - [Mark Ritson](https://www.marketingweek.com/mark-ritson/)\n  - [Grace Kite](https://www.marketingweek.com/grace-kite/)\n  - [Helen James](https://www.marketingweek.com/helen-james-column"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Here’s a summary of the article titled \"AI expected to drive £18bn of UK digital ad spend by 2030\":\n\nAccording to forecasts from IAB UK, AI is projected to account for approximately £18 billion, or one-third (32%), of the UK's digital ad spend by 2030. The report, titled \"The State of AI in Advertising: Charting the Shift from Automation to Autonomy,\" highlights that AI will significantly influence ad spending in areas such as content creation, zero-click search, agentic trading, and agentic commerce.\n\nIAB UK has developed \"AI overlays\" to estimate the proportion of media spend that is AI-driven, which involves decisions made by AI algorithms. The growth is expected to come primarily from AI buying tools in search (like Google’s AI Max), social media (including Meta’s Advantage+), and display advertising through programmatic buying.\n\nThe industry is also experiencing changes in search and discovery, as AI-generated answers are reducing click-through traffic to brand websites. About 74% of advertisers believe that AI summaries are impacting traffic, prompting many to adjust their website structures and content strategies.\n\nWhile AI adoption is increasing, the market is still in a transitional phase, with only 4% of IAB UK members identifying as fully \"agent-first.\" Concerns regarding transparency, governance, and data security are hindering broader adoption, with nearly half of advertisers expressing distrust in AI agents due to a lack of transparency in decision-making.\n\nFor more details, you can read the full article [here](https://www.marketingweek.com/iab-uk-ai-ad-spend/).",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+            "items": [
+              {
+                "title": "AI expected to drive £18bn of UK digital ad spend by 2030",
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                "source": "marketingweek.com",
+                "summary": "­\n\n![](https://marketingweek.imgix.net/uploads/2026/04/shutterstock_2578033595-1.jpg?auto=compress,format&crop=faces,entropy,edges&fit=crop&q=60&w=736&h=430)One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK.\n\nAccording to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce.\n\nTo estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm.\n\nIAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.\n\n## Changes to search\n\nMeanwhile, the industry is facing changes to search and discovery as AI-generated answers reduce click-through traffic and shift value towards “share of model” visibility in large language models and AI assistants.\n\nSome 74% of advertisers believe AI summaries are reducing traffic to brand websites. As a result, almost two-thirds say they have already changed website structures, metadata and content strategies in response to the rise of generative engine optimisation (GEO).\n\nIAB UK chief strategy officer James Chandler says marketers will increasingly need to focus on “winning” share of model – a shift from the past two decades, when they focused on share of search.\n\n“As consumers turn to AI assistants for recommendations, research and product discovery, brands need to think beyond rankings and clicks,” he says.\n\n“The challenge is becoming how they’re represented, understood and surfaced within AI-generated responses.”\n\n# [Three quarters of CMOs grappling with AI skills gap](https://www.marketingweek.com/cmos-grappling-ai-skills-gap/)\n\nElsewhere, more than half (58%) of IAB UK members say they are already experimenting with or piloting agentic AI within their organisations, while a further 16% say they are scaling agentic systems or operating “agent-first” marketing workflows.\n\nCreative production is among the most mature AI use cases, with 63% of IAB UK members expecting AI to have an “accelerating or transformative impact” on creative development over the next 12 months.\n\n“The brands that succeed in the AI era will be those that combine strong digital foundations with trust, relevance and authority. As AI becomes a more influential gatekeeper between consumers and brands, being recommended may become just as important as being found,” adds Chandler.\n\nThe report suggests that while AI adoption is rising, the market remains in a “transitional phase” between experimentation and operational transformation.\n\nOnly 4% of IAB UK members currently consider themselves fully “agent-first”, with concerns around transparency, governance, data security and accountability continuing to limit adoption.\n\nTrust also remains a significant concern. Almost half (47%) of advertisers say they do not trust AI agents in advertising because of a lack of transparency in decision-making, rising to 67% among IAB UK members.\n\n### Search anything and hit ‘Enter’\n\nSearch\n\n- [Festival of Marketing](https://www.marketingweek.com/festival-of-marketing/)\n- [Marketing News](https://www.marketingweek.com/marketing-news/)\n- [Insight](https://www.marketingweek.com/insight/)\n- [Columnists](https://www.marketingweek.com/opinion/)\n  - [Helen Edwards](https://www.marketingweek.com/columnist-helen-edwards/)\n  - [Peter Weinberg & Jon Lombardo](https://www.marketingweek.com/peter-weinberg/)\n  - [Mark Ritson](https://www.marketingweek.com/mark-ritson/)\n  - [Grace Kite](https://www.marketingweek.com/grace-kite/)\n  - [Helen James](https://www.marketingweek.com/helen-james-column"
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T14:46:39"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-06-02T14:47:47",
+      "user": "gửi tin nhắn sau lên Telegram: \"Xin chào bạn nhé\"",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "question": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+                "response_type": "yes_no"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "question": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+                "response_type": "yes_no"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+                "response_type": "yes_no",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có xác nhận muốn gửi tin nhắn này lên Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T14:47:49"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-06-02T14:47:54",
+      "user": "OK, I confirm.",
+      "status": "answered",
+      "assistant_text": "There was an error while trying to send the message to Telegram: \"400 Client Error: Bad Request.\" This could be due to an issue with the Telegram bot or the message format.\n\nPlease check if the bot is set up correctly or if there are any restrictions on the message being sent. Let me know if you would like to try sending a different message or if you need assistance with something else!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "send",
+              "args": {
+                "text": "Xin chào bạn nhé",
+                "confirmed": true
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "send",
+              "args": {
+                "text": "Xin chào bạn nhé",
+                "confirmed": true
+              },
+              "result": {
+                "tool": "send_telegram",
+                "error": "HTTPError",
+                "message": "400 Client Error: Bad Request for url: https://api.telegram.org/bot8822203475:AAHGc7LThHs3sL4VZ3vXWLKAR0utGQG4FqM/sendMessage"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "There was an error while trying to send the message to Telegram: \"400 Client Error: Bad Request.\" This could be due to an issue with the Telegram bot or the message format.\n\nPlease check if the bot is set up correctly or if there are any restrictions on the message being sent. Let me know if you would like to try sending a different message or if you need assistance with something else!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Xin chào bạn nhé",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "HTTPError",
+            "message": "400 Client Error: Bad Request for url: https://api.telegram.org/bot8822203475:AAHGc7LThHs3sL4VZ3vXWLKAR0utGQG4FqM/sendMessage"
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T14:48:01"
+    }
+  ]
+}

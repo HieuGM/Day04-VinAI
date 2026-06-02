@@ -16,6 +16,8 @@ starter/
 
 # Tool scratch output
 arxiv_papers/
+streamlit*.log
+starter_v0/streamlit*.log
 
 # OS / editor
 .DS_Store

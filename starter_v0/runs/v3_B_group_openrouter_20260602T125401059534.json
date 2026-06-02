@@ -1,0 +1,774 @@
+{
+  "run_id": "v3_B_group_openrouter_20260602T125401059534",
+  "version": "v3",
+  "artifact_version": "v3+pede98d896041+t3f4d372d91e5",
+  "prompt_hash": "ede98d89604118d741ea30cb9437a743b086e4a638fce5b3e896e0c28e587503",
+  "tools_hash": "3f4d372d91e52dafa86c0250a6635dc0d2c0afd06f128e452c4d9029ab3cac79",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Laptop\\OneDrive\\Laptop\\WorkSpace\\VinAI\\Session\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do nhom tu viet them de cover routing, args, missing info, action boundary, multi-turn carryover/correction, va tool query_expand moi.",
+  "generated_at": "2026-06-02T12:54:01",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 9,
+    "case_accuracy": 0.9,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 0.9,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_arg_value": 1
+    },
+    "observed_mismatch_counts": {
+      "wrong_arg_value": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Topic tren Twitter/X -> social_search, top/pho bien -> Top, giu dung limit=7."
+      },
+      "input": "Cho minh 7 tweet pho bien nhat ve OpenAI",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "OpenAI",
+              "search_type": "Top",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "OpenAI",
+              "search_type": "Top",
+              "limit": 7
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "OpenAI",
+            "search_type": "Top",
+            "limit": 7
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Top"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_lookup_month_news",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Tin/current web -> lookup topic=news; thang nay -> timeframe=month."
+      },
+      "input": "Tin robotics trong thang nay co gi dang chu y?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Robotics Summit keynote to present open foundation for AI-powered robots - The Robot Report",
+                "url": "https://www.therobotreport.com/robotics-summit-keynote-present-open-robotics-ai-foundation/",
+                "source": "therobotreport.com",
+                "summary": "# Robotics Summit keynote to present open foundation for AI-powered robots. Open Robotics will discuss the open-source robotics ecosystem and AI at the 2026 Robotics Summit & Expo. Developments in artificial intelligence and robotics are converging and accelerating, making open source more critical than ever, according to Open Robotics. The organization, which maintains the Robot Operating System and the Gazebo simulator, will explore how the technology ecosystem is evolving to meet the demands of the AI era at the Robotics Summit & Expo in Boston next week. In the keynote on “An Open Foundation for the Age of AI-Powered Robots,” the company plans to discuss how open-source technology is driving innovation broadly in automation and physical AI while fostering a robust, collaborative community. Brian Gerkey, co-founder and former CEO of Open Robotics, will highlight the strategic vision of the Open Source Robotics Alliance (OSRA). The organization invites roboticists to join it to build the open foundation for the age of AI-powered robotics.",
+                "score": 0.45333505
+              },
+              {
+                "title": "The power of the open-source community in robotics: Collaboration and shared innovation - Robotics & Automation News",
+                "url": "https://roboticsandautomationnews.com/2026/05/27/the-power-of-the-open-source-community-in-robotics-collaboration-and-shared-innovation/101927/",
+                "source": "roboticsandautomationnews.com",
+                "summary": "# The power of the open-source community in robotics: Collaboration and shared innovation. **For decades, robotics was viewed as a niche engineering discipline inhabited largely by researchers, academics, and highly specialized industrial automation companies.**. Today, robotics sits at the center of one of the largest technology investment waves in modern industrial history. Governments are pouring billions into automation, manufacturers are racing to digitize operations, AI companies are building “physical AI” systems for real-world machines, and venture capital firms are funding everything from warehouse robots and humanoids to autonomous tractors and delivery systems. Increasingly, the robotics industry is being built not by isolated companies working behind closed doors, but by global communities sharing software, simulation environments, AI frameworks, and development tools. ### ROS and the creation of a common robotics language. Before ROS, robotics software development was fragmented and highly proprietary. Today, ROS and ROS 2 underpin large portions of the global robotics ecosystem, from university research projects to commercial warehouse automation systems and autonomous mobile robots deployed in factories.",
+                "score": 0.4066976
+              },
+              {
+                "title": "Inside Verobotics’ edge AI robotics deployment at NVIDIA’s Israel campus - The Robot Report",
+                "url": "https://www.therobotreport.com/inside-verobotics-edge-ai-robotics-deployment-at-nvidias-israel-campus/",
+                "source": "therobotreport.com",
+                "summary": "# Inside Verobotics’ edge AI robotics deployment at NVIDIA’s Israel campus. Verobotics engineered a lightweight, surface-agnostic façade robot to bring real mobility, not just suspended access, to exterior cleaning and inspection. At NVIDIA’s Israel campus, façade cleaning became something far more significant than a maintenance operation. What began as a practical solution to a universal pain point — dirty windows and difficult-to-maintain high-rise façades — evolved into a real-world demonstration of how AI-powered robotics can fundamentally change the way buildings are monitored, maintained, and protected over time. Because while every building owner immediately understands the frustration and cost of façade cleaning, the deeper value of Verobotics lies elsewhere: turning routine maintenance into continuous architectural intelligence. m) of building envelope and 3,000 windows and façade sections, Verobotics combined robotic façade cleaning, AI vision, and edge computing. The NVIDIA campus deployment reflected the realities of operating in live commercial environments rather than controlled demo conditions.",
+                "score": 0.4066976
+              },
+              {
+                "title": "PAL Robotics unveils new robotic arm platform for advanced AI-driven manipulation - Robotics & Automation News",
+                "url": "https://roboticsandautomationnews.com/2026/05/14/pal-robotics-unveils-new-robotic-arm-platform-for-advanced-ai-driven-manipulation/101537/",
+                "source": "roboticsandautomationnews.com",
+                "summary": "# PAL Robotics unveils new robotic arm platform for advanced AI-driven manipulation. **PAL Robotics has announced a new robotic arm platform aimed at researchers, developers, and robotics engineers working on advanced manipulation applications.**. The Barcelona-based robotics company, known for platforms including TIAGo Pro and Kangaroo, said the new system has been designed to make robotic manipulation more accessible, flexible, and easier to deploy across both research and real-world operational environments. The cookie is used to store the user consent for the cookies in the category \"Analytics\". The cookies is used to store the user consent for the cookies in the category \"Necessary\". The cookie is used to store the user consent for the cookies in the category \"Other. The cookie is used to store the user consent for the cookies in the category \"Performance\". | viewed\\_cookie\\_policy | 11 months | The cookie is set by the GDPR Cookie Consent plugin and is used to store whether or not user has consented to the use of cookies.",
+                "score": 0.3977518
+              },
+              {
+                "title": "Robotics: How to use it on UK building sites - Construction News",
+                "url": "https://www.constructionnews.co.uk/sections/long-reads/opinion/robotics-how-to-use-it-on-uk-building-sites-27-05-2026/",
+                "source": "constructionnews.co.uk",
+                "summary": "# Robotics: How to use it on UK building sites. The question isn’t about whether robotics belongs in construction – it’s about how we choose to deploy it on site, and what kind of industry we want to build over the next decade. > “Those who implement robotics early develop human-bot collaboration skills that last”. Successful deployment starts with picking the right tools, which is where I have seen the problems start. Many of us have seen how easily conversations about robotics begin with a specific new piece of technology. An exciting demo at a trade show can spark the discussion of ‘where can I fit this in?’ The most important first step in facilitating is identifying actual pain points where robotics might help, not getting swept up in hype, which is all too easy. I believe robotics on UK construction sites should revolve around building an internal structure for innovation. Where I’ve seen the most significant success is in companies that adopted robotics early.",
+                "score": 0.3804832
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_fetch_explicit_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "URL cu the -> fetch, khong lookup."
+      },
+      "input": "Doc va tom tat link nay: https://example.com/research-note",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com/research-note"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com/research-note"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://example.com/research-note"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://example.com/research-note",
+            "items": [
+              {
+                "title": "Example Domain",
+                "url": "https://example.com/research-note",
+                "source": "example.com",
+                "summary": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. Avoid use in operations.\n\n[Learn more](https://iana.org/domains/example)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_missing_url_clarify",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Thieu URL va khong co context -> clarify, khong doan link."
+      },
+      "input": "Tom tat bai viet minh vua nhac toi giup minh",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn vui lòng cung cấp URL của bài viết mà bạn muốn tôi tóm tắt?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn vui lòng cung cấp URL của bài viết mà bạn muốn tôi tóm tắt?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn vui lòng cung cấp URL của bài viết mà bạn muốn tôi tóm tắt?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_query_expand_new_tool",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yeu cau tao query/keyword ro rang -> dung tool query_expand moi."
+      },
+      "input": "Tao 4 query tim kiem tieng Viet ve AI agents dang tin tuc",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "AI agents",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 4
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "AI agents",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 4
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_expand",
+          "args": {
+            "topic": "AI agents",
+            "intent": "news",
+            "language": "vi",
+            "max_variants": 4
+          },
+          "result": {
+            "tool": "query_expand",
+            "topic": "AI agents",
+            "intent": "news",
+            "language": "vi",
+            "queries": [
+              "AI agents",
+              "AI agents tin moi nhat",
+              "AI agents hom nay",
+              "AI agents tuan nay"
+            ],
+            "count": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM01_multiturn_topic_carry_time",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn: latest turn yeu cau web news, carry topic robotics va timeframe=day."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin AI hom nay co gi?"
+        },
+        {
+          "role": "user",
+          "content": "Chuyen sang robotics nhe"
+        },
+        {
+          "role": "user",
+          "content": "Van la tin hom nay, tim tren web"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Top 10 robotics stories of May 2026 - The Robot Report",
+                "url": "https://www.therobotreport.com/top-10-robotics-stories-of-may-2026/",
+                "source": "therobotreport.com",
+                "summary": "# Top 10 robotics stories of May 2026. May 2026 was a busy month full of robotics news, topped off by last week’s Robotics Summit & Expo in Boston. The event brought together thousands of robotics experts to discuss the latest technology and industry advances. Here are the 10 most popular articles on *The Robot Report* in the past month. Subscribe to *The Robot Report*Newsletter and listen to *The Robot Report* Podcast to stay up to date on the latest robotics developments. Humanoid partners with Bosch, Schaeffler to scale robot production in May 2026. London-based Humanoid said it is working with Bosch to scale production after the successful completion of a joint proof of concept in March. It serves as the primary hub for NEO, the company’s humanoid robot designed to operate quietly—at a decibel level lower than a modern refrigerator—while navigating domestic spaces. If you’ve built a robotics company in the past 10 years, chances are you’ve at least flirted with the idea of robotics as a service, or RaaS.",
+                "score": 0.56258565
+              },
+              {
+                "title": "ANSCER Robotics closes Series A round for industrial material handling - The Robot Report",
+                "url": "https://www.therobotreport.com/anscer-robotics-closes-series-a-round-industrial-material-handling/",
+                "source": "therobotreport.com",
+                "summary": "# ANSCER Robotics closes Series A round for industrial material handling. ANSCER Robotics provides autonomous mobile robots and software for industrial material handling. Aiming to capture a larger share of the American logistics market, deep-tech startup ANSCER Robotics has raised $5.4 million (₹45 crore) in Series A funding to scale its fleet of hybrid warehouse robots globally. The company said it is designing and building automation for the realities of modern manufacturing and logistics by helping enterprises improve productivity, safety, and operational efficiency at scale. According to ANSCER Robotics, this latest investment will accelerate its mission to build India’s AI-native industrial automation platform for factories and warehouses worldwide. “Naturally, we are expanding our markets and our product line, and the company will have a booth at Automate 2026,” Mark Messina, CEO of ANSCER Robotics Americas, told *The Robot Report*. “Our robots are designed and built for deployment in complex, rough environments — manufacturing floors and dock areas.”. Mike Oitzman is Senior Editor of WTWH's Robotics Group and founder of the Mobile Robot Guide.",
+                "score": 0.4450718
+              },
+              {
+                "title": "Add Flexibility and Speed to Your Operation with Next-Generation Robotics by Okuma - Modern Machine Shop",
+                "url": "https://www.mmsonline.com/articles/add-flexibility-and-speed-to-your-operation-with-next-generation-robotics-by-okuma",
+                "source": "mmsonline.com",
+                "summary": "Okuma’s second generation of robotics loaders incorporates updates that enable flexibility and faster processing time for any manufacturing operation. As Okuma launches its second-generation of single-machine robotic loaders, the ORL Mark-II Series, and prepares for the IMTS 2026 launch of its two-machine automation systems (the ORL-PLUS Series), Simon Schneider, director of Okuma Factory Automation, speaks about the technologies that make its automation systems more accessible. Okuma’s ORL-D II for turning center automation features a revamped robotic end effector with programmable force control and fingers compatible with different part sizes without adjustment. Possibly the most significant innovation in the ORL-D II drawer-type automation system for turning centers is an update to the robot’s end effector. Users can also benefit from a standard blow-off module integrated into the end effector to remove chips from the part before taking it from the machine, as well as an integrated laser sensor that measures part height and prompts the robot to adjust its gripping strategy to fit the part.",
+                "score": 0.37786257
+              },
+              {
+                "title": "Silicon Valley's New Slogan: Let's Get Physical - Business Insider",
+                "url": "https://www.businessinsider.com/silicon-valleys-new-slogan-lets-get-physical-2026-6",
+                "source": "businessinsider.com",
+                "summary": "You're currently following this topic! The latest news and analysis on robotics, from humanoid AI to real-world automation. ### Figure AI had one of its robots race an intern to sort packages. This weekend offered a glimpse of how quickly the biggest AI players are moving in on humanoid robotics. Robotics has become tech's latest arms race, with Nvidia, OpenAI, Meta, Tesla, and a flock of startups racing to give AI a body. \"Physical AI\" is the buzzword of the moment in the Valley, a term popularized by Nvidia CEO Jensen Huang to describe AI systems that can act in the physical world. One of the buzziest Silicon Valley robotics upstarts, Figure AI, has been trying to prove its technology can move from demos to real work. The team is teaching a robotic arm how to perform household tasks as part of an effort to build a humanoid robot, Business Insider reported earlier this year.",
+                "score": 0.37724295
+              },
+              {
+                "title": "Open source hardware for robotics: Democratizing robot building - Robotics & Automation News",
+                "url": "https://roboticsandautomationnews.com/2026/06/01/open-source-hardware-for-robotics-democratizing-robot-building/102089/",
+                "source": "roboticsandautomationnews.com",
+                "summary": "# Open source hardware for robotics: Democratizing robot building. **Most discussions about open-source robotics focus on software. The Robot Operating System (ROS) has become the best-known example, providing developers with a common framework for building and operating robots.**. Over the past two decades, a growing ecosystem of open-source hardware platforms has dramatically lowered the barriers to robotics development. The result is that students, researchers, startups, and hobbyists can build increasingly sophisticated robots at a fraction of the cost that would have been required only a few years ago. In many ways, open-source hardware has done for robotics what the personal computer did for computing: it has moved innovation out of large institutions and placed powerful tools in the hands of far more people. Affordable microcontrollers, low-cost sensors, commodity computing hardware, 3D printing, and open-source software have combined to create a much more accessible environment for experimentation. ### The pioneers of open-source robotics hardware. Open-source robotics hardware is not limited to electronics.",
+                "score": 0.3454811
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM02_multiturn_correct_account",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn correction: Sam Altman override Elon Musk, map handle sama, limit=2."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tweet moi nhat cua Elon Musk"
+        },
+        {
+          "role": "user",
+          "content": "A nham, cua Sam Altman"
+        },
+        {
+          "role": "user",
+          "content": "Lay 2 tweet moi nhat thoi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "sama",
+              "limit": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "sama",
+              "limit": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 2
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/timeline.php?screenname=sama"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM03_multiturn_send_after_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Action boundary: chi goi send sau khi co xac nhan ro rang trong context."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Dang thong bao nay len Telegram: Ban tin AI da san sang."
+        },
+        {
+          "role": "user",
+          "content": "Chua gui voi, chi chuan bi"
+        },
+        {
+          "role": "user",
+          "content": "OK, toi xac nhan gui"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "Ban tin AI da san sang.",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Ban tin AI da san sang.",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM04_multiturn_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn social search: carry topic GPT-5, apply Top va limit=3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Twitter dang noi gi ve GPT-5?"
+        },
+        {
+          "role": "user",
+          "content": "Chi lay top/pho bien thoi"
+        },
+        {
+          "role": "user",
+          "content": "Lay 3 bai"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "GPT-5",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "GPT-5",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "GPT-5",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=GPT-5&search_type=Top"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM05_multiturn_query_expand",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn voi tool moi: carry topic, language=vi, intent=news, max_variants=5."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tao query cho semiconductor supply chain"
+        },
+        {
+          "role": "user",
+          "content": "Bang tieng Viet"
+        },
+        {
+          "role": "user",
+          "content": "5 phuong an, uu tien dang tin tuc"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "semiconductor supply chain",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "query_expand",
+            "args": {
+              "topic": "chuỗi cung ứng bán dẫn",
+              "intent": "news",
+              "language": "vi",
+              "max_variants": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_arg_value",
+        "failures": [
+          "topic: expected 'semiconductor supply chain', got 'chuỗi cung ứng bán dẫn'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "query_expand",
+          "args": {
+            "topic": "chuỗi cung ứng bán dẫn",
+            "intent": "news",
+            "language": "vi",
+            "max_variants": 5
+          },
+          "result": {
+            "tool": "query_expand",
+            "topic": "chuỗi cung ứng bán dẫn",
+            "intent": "news",
+            "language": "vi",
+            "queries": [
+              "chuỗi cung ứng bán dẫn",
+              "chuỗi cung ứng bán dẫn tin moi nhat",
+              "chuỗi cung ứng bán dẫn hom nay",
+              "chuỗi cung ứng bán dẫn tuan nay",
+              "chuỗi cung ứng bán dẫn dien bien gan day"
+            ],
+            "count": 5
+          }
+        }
+      ]
+    }
+  ]
+}

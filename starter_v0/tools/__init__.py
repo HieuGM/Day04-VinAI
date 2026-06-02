@@ -14,6 +14,7 @@ from .timeline.tool import get_user_tweets
 from .fetch.tool import read_url
 from .format.tool import render_digest
 from .policy.tool import search_company_policy
+from .query_expand.tool import expand_search_queries
 from .social_search.tool import search_tweets
 from .send.tool import send_telegram
 from .lookup.tool import web_search
@@ -35,6 +36,7 @@ TOOL_FUNCTIONS = {
     "policy": search_company_policy,
     "papers": arxiv_search,
     "paper_text": get_arxiv_paper_text,
+    "query_expand": expand_search_queries,
 }
 
 

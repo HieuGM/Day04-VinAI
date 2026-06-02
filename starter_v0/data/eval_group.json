@@ -1,7 +1,118 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "description": "Case do nhom tu viet them de cover routing, args, missing info, action boundary, multi-turn carryover/correction, va tool query_expand moi.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "query": "Cho minh 7 tweet pho bien nhat ve OpenAI",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "OpenAI", "search_type": "Top", "limit": 7}}]},
+      "metadata": {"what_it_tests": "Topic tren Twitter/X -> social_search, top/pho bien -> Top, giu dung limit=7."}
+    },
+    {
+      "id": "G02_lookup_month_news",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tin robotics trong thang nay co gi dang chu y?",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "robotics", "topic": "news", "timeframe": "month"}}]},
+      "metadata": {"what_it_tests": "Tin/current web -> lookup topic=news; thang nay -> timeframe=month."}
+    },
+    {
+      "id": "G03_fetch_explicit_url",
+      "phase": "B",
+      "suite": "group",
+      "query": "Doc va tom tat link nay: https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://viblo.asia/p/google-adk-do-choi-moi-cho-dan-nghien-ai-agent-y3RL1yYoLao"}}]},
+      "metadata": {"what_it_tests": "URL cu the -> fetch, khong lookup."}
+    },
+    {
+      "id": "G04_missing_url_clarify",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tom tat bai viet minh vua nhac toi giup minh",
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
+      "metadata": {"what_it_tests": "Thieu URL va khong co context -> clarify, khong doan link."}
+    },
+    {
+      "id": "G05_query_expand_new_tool",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tao 4 query tim kiem tieng Viet ve AI agents dang tin tuc",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "query_expand", "args": {"topic": "AI agents", "intent": "news", "language": "vi", "max_variants": 4}}]},
+      "metadata": {"what_it_tests": "Yeu cau tao query/keyword ro rang -> dung tool query_expand moi."}
+    },
+    {
+      "id": "GM01_multiturn_topic_carry_time",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tin AI hom nay co gi?"},
+        {"role": "user", "content": "Chuyen sang robotics nhe"},
+        {"role": "user", "content": "Van la tin hom nay, tim tren web"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "robotics", "topic": "news", "timeframe": "day"}}]},
+      "metadata": {"what_it_tests": "Multi-turn: latest turn yeu cau web news, carry topic robotics va timeframe=day."}
+    },
+    {
+      "id": "GM02_multiturn_correct_account",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tweet moi nhat cua Elon Musk"},
+        {"role": "user", "content": "A nham, cua Sam Altman"},
+        {"role": "user", "content": "Lay 2 tweet moi nhat thoi"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "sama", "limit": 2}}]},
+      "metadata": {"what_it_tests": "Multi-turn correction: Sam Altman override Elon Musk, map handle sama, limit=2."}
+    },
+    {
+      "id": "GM03_multiturn_send_after_confirm",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Dang thong bao nay len Telegram: Ban tin AI da san sang."},
+        {"role": "user", "content": "Chua gui voi, chi chuan bi"},
+        {"role": "user", "content": "OK, toi xac nhan gui"}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "send", "args": {"confirmed": true}}]},
+      "metadata": {"what_it_tests": "Action boundary: chi goi send sau khi co xac nhan ro rang trong context."}
+    },
+    {
+      "id": "GM04_multiturn_social_top_limit",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Twitter dang noi gi ve GPT-5?"},
+        {"role": "user", "content": "Chi lay top/pho bien thoi"},
+        {"role": "user", "content": "Lay 3 bai"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "GPT-5", "search_type": "Top", "limit": 3}}]},
+      "metadata": {"what_it_tests": "Multi-turn social search: carry topic GPT-5, apply Top va limit=3."}
+    },
+    {
+      "id": "GM05_multiturn_query_expand",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tao query cho semiconductor supply chain"},
+        {"role": "user", "content": "Bang tieng Viet"},
+        {"role": "user", "content": "5 phuong an, uu tien dang tin tuc"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "query_expand", "args": {"topic": "chuỗi cung ứng bán dẫn", "intent": "news", "language": "vi", "max_variants": 5}}]},
+      "metadata": {"what_it_tests": "Multi-turn voi tool moi: carry topic sang dang tieng Viet, language=vi, intent=news, max_variants=5."}
+    }
+  ]
 }
